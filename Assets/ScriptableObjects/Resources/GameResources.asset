@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4dd824b000ef7c40b2e4b5da0afb56c, type: 3}
+  m_Name: GameResources
+  m_EditorClassIdentifier: 
+  unitHUDPrefab: {fileID: 4434196892372380425, guid: ab7eb9a2b5e21b746a71f8a7ecfb6b00, type: 3}
+  enemyUnitHUDPrefab: {fileID: 1481490450095709610, guid: 62ba5e1ea9b7d954b989caf4b98d4d9a, type: 3}
+  turnIconPrefab: {fileID: 3776433882845951860, guid: 4f837a140f95adf4d9da1229dbb42dad, type: 3}
+  skillButtonPrefab: {fileID: 8967263435081092265, guid: 8ff0f1c5954c62f4e954916a992d983e, type: 3}
+  defaultMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  playerUnits:
+  - unitData: {fileID: 11400000, guid: 505fce2c6948f564e901281e24826919, type: 2}
+    experience: 0
+  - unitData: {fileID: 11400000, guid: cec05b815b5c0904ab56f8c4de29a303, type: 2}
+    experience: 0
+  combatData: {fileID: 11400000, guid: 67d38fd503ea1804a886a3ad43a9a698, type: 2}
+  playerOutlineMaterial: {fileID: 2100000, guid: c0553a49f11952d4bbda2517757d6992, type: 2}
+  targetOutlineMaterial: {fileID: 2100000, guid: 2d1022b5864d94d4eaebb25547fb5b5b, type: 2}
