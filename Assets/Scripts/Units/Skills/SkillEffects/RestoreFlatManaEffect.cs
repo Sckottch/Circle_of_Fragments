@@ -8,13 +8,17 @@ public class RestoreFlatManaEffect : SkillEffect
     [Header("Parametros da Skill")]
     public float restoreAmount;
 
-    public override void ApplyEffect(Unit targetUnit, Unit casterUnit, List<Unit> allTargets, SkillDataSO skillData)
+    public override SkillEffectResult ApplyEffect(Unit targetUnit, Unit casterUnit, List<Unit> allTargets, SkillDataSO skillData)
     {
-        List<Unit> targets = TargetSystem.GetUnisByTargetType(targetType, casterUnit, targetUnit, allTargets);
+        List<Unit> targets = TargetSystem.GetUnitsByTargetType(targetType, casterUnit, targetUnit, allTargets);
+        float totalRestored = 0f;
 
         foreach (Unit target in targets)
         {
             target.GainMana(restoreAmount);
+            totalRestored += restoreAmount;
         }
+
+        return new SkillEffectResult(totalRestored, SkillResultType.ManaRestored, targets);
     }
 }

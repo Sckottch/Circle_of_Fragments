@@ -104,3 +104,12 @@ public enum BuffCategory
     Trigger,
     Special
 }
+
+public enum SkillResultType
+{
+    DamageDealt,
+    HealingDone,
+    ManaRestored,
+    ShieldApplied,
+    Other
+}

@@ -45,7 +45,8 @@ public class CommonEnemy : EnemyUnit
 
         if (skill.HasEnoughMana())
         {
-            return skill.Execute(mainTarget, allTargets);
+            skill.Execute(mainTarget, allTargets);
+            return true;
         }
         else
         {

@@ -1,0 +1,7 @@
+{
+    "dotnet.preferCSharpExtension": true,
+
+    "workbench.colorCustomizations": {
+        "editor.background": "#1E1E1E"
+    }
+}

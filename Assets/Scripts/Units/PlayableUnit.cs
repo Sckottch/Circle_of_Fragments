@@ -87,17 +87,14 @@ public class PlayableUnit : Unit
 
         if (skill != null)
         {
-            isSkillUsed = skill.Execute(mainTarget, allTargets);
+            SkillUsed(this, mainTarget, allTargets, skill);
+            SkillResult skillResult = skill.Execute(mainTarget, allTargets);
+            CallSkillResult(skillResult);
+            
+            isSkillUsed = skillResult != null;
         }
 
-        if (isSkillUsed)
-        {
-            Debug.Log($"{UnitName} used Skill {skill.SkillData.skillName} used on {mainTarget.UnitName}");
-        }
-        else
-        {
-            Debug.Log($"Skill {skill.SkillData.skillName} failed to execute.");
-        }
+        Debug.Log($"{UnitName} used Skill {skill.SkillData.skillName} used on {mainTarget.UnitName}");
 
         return isSkillUsed;
     }

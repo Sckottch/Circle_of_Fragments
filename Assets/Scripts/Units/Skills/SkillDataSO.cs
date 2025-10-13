@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class SkillDataSO : ScriptableObject
 {
     [Space(10)]
-    [Header("Informações Basicas")]
+    [Header("InformaÃ§Ãµes Basicas")]
     public string skillName;
     [TextArea] public string skillDescription;
     public Sprite skillIcon;

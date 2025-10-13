@@ -37,6 +37,8 @@ public abstract class Unit : MonoBehaviour
     public event Action<Unit, Buff> OnBuffRemoved;
     public event Action<Unit> OnSpeedChanged;
     public event Action<Unit> OnMaxHealthChanged;
+    public event Action<Unit, Unit, List<Unit>, Skill> OnSkillUsed;
+    public event Action<Unit, SkillResult> OnSkillResult;
 
     private void Awake()
     {
@@ -125,6 +127,16 @@ public abstract class Unit : MonoBehaviour
     public void SpeedChanged()
     {
         OnSpeedChanged?.Invoke(this);
+    }
+
+    public void SkillUsed(Unit caster, Unit mainTarget, List<Unit> allTargets, Skill skill)
+    {
+        OnSkillUsed?.Invoke(caster, mainTarget, allTargets, skill);
+    }
+
+    public void CallSkillResult(SkillResult result)
+    {
+        OnSkillResult?.Invoke(this, result);
     }
 
     public void MaxHealthChanged()

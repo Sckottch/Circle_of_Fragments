@@ -43,7 +43,6 @@ public class BuffSystem : MonoBehaviour
         {
             unit.OnDeath += HandleUnitDeath;
             unit.OnBuffApplied += HandleBuffApplied;
-            unit.OnBuffRemoved += HandleBuffRemoved;
         }
 
         Debug.Log($"BuffSystem started with {activeUnits.Count} active units.");
@@ -56,7 +55,6 @@ public class BuffSystem : MonoBehaviour
             activeUnits.Add(enemyUnit);
             enemyUnit.OnDeath += HandleUnitDeath;
             enemyUnit.OnBuffApplied += HandleBuffApplied;
-            enemyUnit.OnBuffRemoved += HandleBuffRemoved;
         }
 
         Debug.Log($"BuffSystem: Enemy unit added: {enemyUnit.UnitName}. Total active units: {activeUnits.Count}");
@@ -68,7 +66,6 @@ public class BuffSystem : MonoBehaviour
 
         unit.OnDeath -= HandleUnitDeath;
         unit.OnBuffApplied -= HandleBuffApplied;
-        unit.OnBuffRemoved -= HandleBuffRemoved;
     }
 
     #endregion
@@ -90,23 +87,26 @@ public class BuffSystem : MonoBehaviour
         else
         {
             existingBuff.OnApply(target, caster);
-        }
-
-        
-    }
-
-    private void HandleBuffRemoved(Unit target, Buff buff)
-    {
-        Buff toRemoveBuff = target.ActiveBuffs.Find(b => b.buffName == buff.buffName);
-
-        target.ActiveBuffs.Remove(toRemoveBuff);
-
-        toRemoveBuff.OnRemove(target);
-
-        Destroy(toRemoveBuff);
+        } 
     }
 
     private void HandleTurnStart(Unit unit)
+    {
+        ApplyTurnStartBuffs(unit);
+
+        TickBuffs(unit);
+    }
+
+    private void HandleTurnEnd(Unit unit)
+    {
+        ApplyTurnEndBuffs(unit);
+
+        RemoveExpiredStacks(unit);
+
+        RemoveBuffs(unit);
+    }
+
+    private void ApplyTurnStartBuffs(Unit unit)
     {
         List<Buff> buffs = unit.ActiveBuffs.FindAll(b => b.actionTime == BuffActionTime.OnTurnStart && b.duration > 0);
 
@@ -114,13 +114,6 @@ public class BuffSystem : MonoBehaviour
         {
             buff.ApplyEffect(unit);
         }
-    }
-
-    private void HandleTurnEnd(Unit unit)
-    {
-        ApplyTurnEndBuffs(unit);
-
-        TickBuffs(unit);
     }
 
     private void ApplyTurnEndBuffs(Unit unit)
@@ -138,10 +131,25 @@ public class BuffSystem : MonoBehaviour
         foreach (Buff buff in unit.ActiveBuffs)
         {
             buff.Tick();
+        }
+    }
 
+    private void RemoveExpiredStacks(Unit unit)
+    {
+        foreach (Buff buff in unit.ActiveBuffs)
+        {
+            buff.RemoveExpiredStacks();
+        }
+    }
+
+    private void RemoveBuffs(Unit unit)
+    {
+        foreach (Buff buff in unit.ActiveBuffs)
+        {
             if (buff.duration <= 0)
             {
                 buff.OnRemove(unit);
+                unit.RemoveBuff(buff);
             }
         }
 
@@ -168,7 +176,6 @@ public class BuffSystem : MonoBehaviour
         {
             unit.OnDeath -= HandleUnitDeath;
             unit.OnBuffApplied -= HandleBuffApplied;
-            unit.OnBuffRemoved -= HandleBuffRemoved;
         }
 
         activeUnits.Clear();

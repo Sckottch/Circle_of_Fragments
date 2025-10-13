@@ -30,7 +30,7 @@ public static class TargetSystem
         }
     }
 
-    public static List<Unit> GetUnisByTargetType(TargetType targetType, Unit caster, Unit mainTarget, List<Unit> allTargets)
+    public static List<Unit> GetUnitsByTargetType(TargetType targetType, Unit caster, Unit mainTarget, List<Unit> allTargets)
     {
         List<Unit> targets = new List<Unit>();
         switch (targetType)

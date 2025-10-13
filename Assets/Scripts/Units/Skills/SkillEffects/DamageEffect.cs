@@ -9,15 +9,15 @@ public class DamageEffect : SkillEffect
     [Header("Parametros da Skill")]
     [SerializeField] private float damageMultiplier;
 
-    public override void ApplyEffect(Unit targetUnit, Unit casterUnit, List<Unit> allTargets, SkillDataSO skillData)
+    public override SkillEffectResult ApplyEffect(Unit targetUnit, Unit casterUnit, List<Unit> allTargets, SkillDataSO skillData)
     {
-        List<Unit> targets = TargetSystem.GetUnisByTargetType(targetType, casterUnit, targetUnit, allTargets);
-        float baseStat = casterUnit.GetStats().GetStatByType(skillData.scalingType); 
+        List<Unit> targets = TargetSystem.GetUnitsByTargetType(targetType, casterUnit, targetUnit, allTargets);
+        float totalDamage = 0f;
 
         if (targets == null)
         {
             Debug.LogError("No targets found.");
-            return;
+            return null;
         }
 
         foreach (Unit target in targets)
@@ -28,6 +28,10 @@ public class DamageEffect : SkillEffect
             Debug.Log($"Caster: {casterUnit.UnitName} | Damage: {damage} | Target: {target.UnitName}");
 
             target.TakeDamage(damage);
+
+            totalDamage += damage;
         }
+
+        return new SkillEffectResult(totalDamage, SkillResultType.DamageDealt, targets);
     }
 }

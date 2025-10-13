@@ -28,6 +28,7 @@ public abstract class Buff : ScriptableObject
 
     protected List<BuffStack> stacks;
     public Unit Caster { get; protected set; }
+    public Unit Target { get; protected set; }
 
     #endregion
 
@@ -36,6 +37,8 @@ public abstract class Buff : ScriptableObject
     public abstract void ApplyEffect(Unit target);
 
     public abstract void OnRemove(Unit target);
+
+    protected abstract void OnStackChange();
 
     public void Add()
     {
@@ -80,12 +83,27 @@ public abstract class Buff : ScriptableObject
         {
             stack.duration--;
         }
+    }
 
-        stacks.RemoveAll(s => s.duration <= 0);
+    public void RemoveExpiredStacks()
+    {
+        if (stacks == null) return;
+
+        int initialCount = stacks.Count;
+
+        stacks.RemoveAll(stack => stack.duration <= 0);
+
+        int removedCount = initialCount - stacks.Count;
 
         if (stacks.Count == 0)
         {
             duration = 0;
+            return;
+        }
+
+        if (removedCount > 0 && Target != null)
+        {
+            OnStackChange();
         }
     }
 
