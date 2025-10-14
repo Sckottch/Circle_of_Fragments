@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(BoxCollider2D))]
+[DisallowMultipleComponent]
 public abstract class Unit : MonoBehaviour
 {
     public string UnitName { get; protected set; }
@@ -37,11 +39,11 @@ public abstract class Unit : MonoBehaviour
     public event Action<Unit, Buff> OnBuffRemoved;
     public event Action<Unit> OnSpeedChanged;
     public event Action<Unit> OnMaxHealthChanged;
-    public event Action<Unit> OnHit;
+    public event Action<Unit, float> OnHit;
     public event Action<Unit, Unit, List<Unit>, Skill> OnSkillUsed;
     public event Action<Unit, SkillResult> OnSkillResult;
 
-    private void Awake()
+    protected void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -64,7 +66,7 @@ public abstract class Unit : MonoBehaviour
     {
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
         HealthChanged();
-        OnHit?.Invoke(this);
+        OnHit?.Invoke(this, damage);
 
         if (CurrentHealth <= 0)
         {

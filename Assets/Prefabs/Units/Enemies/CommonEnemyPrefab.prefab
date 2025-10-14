@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9164643430189361781}
   - component: {fileID: -9155983993730435620}
-  - component: {fileID: 811028728075508992}
   - component: {fileID: 1434304647722930565}
+  - component: {fileID: 811028728075508992}
   m_Layer: 0
   m_Name: CommonEnemyPrefab
   m_TagString: Untagged
@@ -54,6 +54,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -75,6 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -89,18 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &811028728075508992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4495722003171451869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8be77ff11b3c87a49bf89064987ad08d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1434304647722930565
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,3 +138,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.4029236, y: 2.491841}
   m_EdgeRadius: 0
+--- !u!114 &811028728075508992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4495722003171451869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8be77ff11b3c87a49bf89064987ad08d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

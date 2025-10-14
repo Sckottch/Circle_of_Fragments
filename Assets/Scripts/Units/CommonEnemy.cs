@@ -18,19 +18,19 @@ public class CommonEnemy : EnemyUnit
         }
         UnitData = data;
 
-        this.UnitName = EnemyData.unitName;
+        UnitName = EnemyData.unitName;
 
-        this.baseStats = EnemyData.baseStats;
-        this.baseSpecialStats = EnemyData.baseSpecialStats;
+        baseStats = EnemyData.baseStats;
+        baseSpecialStats = EnemyData.baseSpecialStats;
 
-        this.ElementalWeaknesses = EnemyData.elementalWeaknesses;
-        this.ElementalResistance = EnemyData.elementalResistance;
+        ElementalWeaknesses = EnemyData.elementalWeaknesses;
+        ElementalResistance = EnemyData.elementalResistance;
 
-        this.spriteRenderer.sprite = EnemyData.unitSprite;
+        spriteRenderer.sprite = EnemyData.unitSprite;
 
-        this.lastHealth = this.baseStats.health;
-        this.CurrentHealth = this.baseStats.health;
-        this.CurrentMana = this.baseSpecialStats.mana;
+        lastHealth = baseStats.health;
+        CurrentHealth = baseStats.health;
+        CurrentMana = baseSpecialStats.mana;
 
         skill = new Skill(this, EnemyData.enemySkill);
     }

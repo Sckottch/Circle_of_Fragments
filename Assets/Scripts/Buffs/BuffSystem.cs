@@ -78,7 +78,7 @@ public class BuffSystem : MonoBehaviour
 
         if (existingBuff == null)
         {
-            Buff newBuff = ScriptableObject.Instantiate(buff);
+            Buff newBuff = Instantiate(buff);
             target.ActiveBuffs.Add(newBuff);
             newBuff.OnApply(target, caster);
 

@@ -44,12 +44,26 @@ public class PassiveManager : SingletonMonoBehaviour<PassiveManager>
             {
                 PlayableUnitSO unitData = unit.UnitData as PlayableUnitSO;
 
-                PassiveBase passive = Instantiate(unitData.Passive);
+                PassiveBase passive = Instantiate(unitData.passive);
 
                 passive.Initialize(unit);
                 AllPassives.Add(unit, passive);
             }
+
+            unit.OnDeath += HandleUnitDeath;
         }
+    }
+
+    private void HandleUnitDeath(Unit unit)
+    {
+        if (AllPassives.ContainsKey(unit))
+        {
+            AllPassives[unit].CleanUp();
+            AllPassives.Remove(unit);
+        }
+
+        unit.OnDeath -= HandleUnitDeath;
+        ActiveUnits.Remove(unit);
     }
 
     #endregion

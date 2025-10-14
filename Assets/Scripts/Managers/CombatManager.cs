@@ -7,6 +7,7 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour
 {
     [SerializeField] private ActionPanel actionPanel;
+    [SerializeField] private Color allyColor;
 
     private Unit currentUnit;
 
@@ -202,9 +203,11 @@ public class CombatManager : MonoBehaviour
 
         foreach (Unit target in targets)
         {
-            Material material = GameManager.Instance.gameResources.targetOutlineMaterial;
+            Material material = new (GameManager.Instance.gameResources.targetOutlineMaterial);
 
             if (material == null) return;
+
+            if (target.IsPlayer) material.color = allyColor;
 
             target.SetMaterial(material);
         }

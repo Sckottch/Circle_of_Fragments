@@ -113,3 +113,14 @@ public enum SkillResultType
     ShieldApplied,
     Other
 }
+
+public enum CharacterClass
+{
+    Warrior,
+    Mage,
+    Rogue,
+    Healer,
+    Tank,
+    Ranger,
+    Support
+}

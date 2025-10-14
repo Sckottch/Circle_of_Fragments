@@ -13,13 +13,12 @@ public class TokiriPassive : PassiveBase
         ownerUnit.OnHit += HandleOnHit;
     }
 
-    private void HandleOnHit(Unit unit)
+    private void HandleOnHit(Unit unit, float damage)
     {
         ownerUnit.ModifyActionValue(actionValueAdvance);
         Debug.Log($"{ownerUnit.UnitData.unitName} was hit and gained {actionValueAdvance} action value from Tokiri's passive.");
     }
-
-        public override void CleanUp()
+    public override void CleanUp()
     {
         ownerUnit.OnHit -= HandleOnHit;
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2ffa38c321c644fa6018e9e44c25a8, type: 3}
   m_Name: TokiriPassive
   m_EditorClassIdentifier: Assembly-CSharp::TokiriPassive
-  passiveName: 
-  description: 
+  passiveName: Voo de Tokiri
+  description: "Avan\xE7a a\xE7\xE3o de Tokiri em 15% toda vez que ele sofre um ataque"
   icon: {fileID: 0}
-  actionValueAdvance: 0
+  actionValueAdvance: 15

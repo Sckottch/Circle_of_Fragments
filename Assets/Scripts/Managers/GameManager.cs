@@ -2,23 +2,15 @@ using System;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     public GameResources gameResources;
 
     #region Singleton
 
-    public static GameManager Instance { get; private set; }
-    
-    private void Awake()
+    protected override void Awake()
     {
-        if(Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
+        base.Awake();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -27,8 +19,8 @@ public class GameManager : MonoBehaviour
     
 
     #region Temp Setup Region
-    //Regi„o para colocar funÁıes de teste para fase atual do projeto
-    //essas funÁıes ser„o movidas para diferentes classes no futuro porem ser„o necessarias para testes iniciais
+    //Regi√£o para colocar fun√ß√µes de teste para fase atual do projeto
+    //essas fun√ß√µees ser√£o movidas para diferentes classes no futuro porem ser√£o necessarias para testes iniciais
 
     private CombatData combatData;
 
@@ -64,7 +56,7 @@ public class GameManager : MonoBehaviour
 
 }
 
-public struct CombatEndResult
+public class CombatEndResult
 {
     public bool playerWon;
 }

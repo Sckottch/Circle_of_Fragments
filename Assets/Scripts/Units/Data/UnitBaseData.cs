@@ -3,13 +3,13 @@ using UnityEngine;
 public class UnitBaseData : ScriptableObject
 {
     [Space(10)]
-    [Header("Character Info")]
+    [Header("Unit Info")]
 
     public string unitName;
     public Sprite unitSprite;
 
     [Space(10)]
-    [Header("Character Stats")]
+    [Header("Unit Stats")]
     public Stats baseStats;
     public SpecialStats baseSpecialStats;
 }
