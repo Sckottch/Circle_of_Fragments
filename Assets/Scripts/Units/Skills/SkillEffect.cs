@@ -23,5 +23,4 @@ public class SkillEffectResult
         ResultType = resultType;
         AffectedUnits = affectedUnits;
     }
-
 }

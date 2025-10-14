@@ -17,14 +17,14 @@ public class RavenPassive : PassiveBase
 
     private void UpdateMaxLifestealAmount(Unit unit)
     {
-        maxLifeStealAmount = unit.GetStats().health * (25 / 100f);
+        maxLifeStealAmount = unit.GetStats().health / 4;
     }
 
     private void HandleSkillResult(Unit unit, SkillResult result)
     {
         if(result.DamageDealt > 0)
         {
-            float lifeStealAmount = result.DamageDealt * (lifeStealPercentage / 100f);
+            float lifeStealAmount = result.DamageDealt * lifeStealPercentage / 100f;
 
             if (lifeStealAmount > maxLifeStealAmount)
             {
@@ -32,11 +32,13 @@ public class RavenPassive : PassiveBase
             }
 
             ownerUnit.Heal(lifeStealAmount);
+            Debug.Log($"{ownerUnit.UnitData.unitName} healed for {lifeStealAmount} health from Raven's passive.");
         }
     }
     
     public override void CleanUp()
     {
-        throw new System.NotImplementedException();
+        ownerUnit.OnSkillResult -= HandleSkillResult;
+        ownerUnit.OnMaxHealthChanged -= UpdateMaxLifestealAmount;
     }
 }

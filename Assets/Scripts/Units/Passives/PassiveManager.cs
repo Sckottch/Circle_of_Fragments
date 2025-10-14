@@ -65,6 +65,7 @@ public class PassiveManager : SingletonMonoBehaviour<PassiveManager>
     {
         foreach (var passive in AllPassives.Values)
         {
+            passive.CleanUp();
             Destroy(passive);
         }
         AllPassives.Clear();

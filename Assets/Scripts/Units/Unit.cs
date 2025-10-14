@@ -37,6 +37,7 @@ public abstract class Unit : MonoBehaviour
     public event Action<Unit, Buff> OnBuffRemoved;
     public event Action<Unit> OnSpeedChanged;
     public event Action<Unit> OnMaxHealthChanged;
+    public event Action<Unit> OnHit;
     public event Action<Unit, Unit, List<Unit>, Skill> OnSkillUsed;
     public event Action<Unit, SkillResult> OnSkillResult;
 
@@ -63,6 +64,7 @@ public abstract class Unit : MonoBehaviour
     {
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
         HealthChanged();
+        OnHit?.Invoke(this);
 
         if (CurrentHealth <= 0)
         {
