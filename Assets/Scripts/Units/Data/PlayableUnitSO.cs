@@ -13,6 +13,7 @@ public class PlayableUnitSO : UnitBaseData
 
     [Space(10)]
     [Header("Character Skills")]
+    public PassiveBase Passive;
     public SkillDataSO basicSkill;
     public SkillDataSO specialSkill;
     public SkillDataSO ultimateSkill;

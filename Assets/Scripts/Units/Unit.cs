@@ -89,6 +89,13 @@ public abstract class Unit : MonoBehaviour
         ManaChanged();
     }
 
+    public void Heal(float amount)
+    {
+        CurrentHealth += amount;
+        CurrentHealth = Mathf.Min(CurrentHealth, GetStats().health);
+        HealthChanged();
+    }
+
     public bool IsAlive()
     {
         return CurrentHealth > 0;
