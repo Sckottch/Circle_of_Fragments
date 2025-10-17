@@ -11,6 +11,7 @@ public class PassiveManager : SingletonMonoBehaviour<PassiveManager>
         WaveManager.OnWaveStarted += HandleWaveStarted;
         WaveManager.OnWaveEnded += HandleWaveEnded;
         //CombatSetup.OnEnemyUnitAdded += HandleEnemyUnitAdded;
+        GameManager.OnCombatEnd += HandleCombatEnd;
     }
 
     private void OnDisable()
@@ -18,6 +19,7 @@ public class PassiveManager : SingletonMonoBehaviour<PassiveManager>
         WaveManager.OnWaveStarted -= HandleWaveStarted;
         WaveManager.OnWaveEnded -= HandleWaveEnded;
         //CombatSetup.OnEnemyUnitAdded -= HandleEnemyUnitAdded;
+        GameManager.OnCombatEnd -= HandleCombatEnd;
     }
 
     #region Setup
@@ -71,6 +73,11 @@ public class PassiveManager : SingletonMonoBehaviour<PassiveManager>
     #region Cleanup
 
     private void HandleWaveEnded()
+    {
+        Clear();
+    }
+
+    private void HandleCombatEnd(CombatEndResult result)
     {
         Clear();
     }

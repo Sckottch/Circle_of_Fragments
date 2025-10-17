@@ -12,10 +12,8 @@ public class SkillDataSO : ScriptableObject
     public Sprite skillIcon;
 
     [Space(10)]
-    [Header("Custo")]
+    [Header("Configurações da Skill")]
     public float manaCost;
-
-    [Header("Tipo de Habilidade e Escalonamento")]
     public ActionType skillType;
     public StatType scalingType;
 
@@ -25,5 +23,5 @@ public class SkillDataSO : ScriptableObject
 
     [Space(10)]
     [Header("Efeitos da Skill")]
-    public List<SkillEffect> skillEffects;
+    public List<SkillEffect> skillEffects = new();
 }

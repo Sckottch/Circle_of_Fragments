@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b7f5586ee9a4c244872a3e273854397, type: 3}
   m_Name: SS_StatBuff
   m_EditorClassIdentifier: 
-  targetType: 2
+  targetType: 4
   statBuff: {fileID: 11400000, guid: 69fe5fd9708385f4f98e065974b2a9c1, type: 2}

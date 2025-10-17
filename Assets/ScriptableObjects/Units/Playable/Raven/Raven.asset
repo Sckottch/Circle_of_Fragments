@@ -32,11 +32,11 @@ MonoBehaviour:
     shieldStrength: 0
     accuracy: 100
     evasion: 0
-  characterClass: 0
   unitPrefab: {fileID: 5932561335117409529, guid: 0afe5021408696647b9036e9542552be, type: 3}
+  characterClass: 0
   element: 0
+  ascensionStat: 6
   passive: {fileID: 11400000, guid: a62448cd84468084d9f37f70a7973922, type: 2}
   basicSkill: {fileID: 11400000, guid: 64a712dfa865b0842ad2acd7a1a93e7b, type: 2}
   specialSkill: {fileID: 11400000, guid: 410e363a0cb669c46ba04419c8342086, type: 2}
   ultimateSkill: {fileID: 11400000, guid: f8da1a00136351849b2805bd06cd144d, type: 2}
-  ascensionStat: 6

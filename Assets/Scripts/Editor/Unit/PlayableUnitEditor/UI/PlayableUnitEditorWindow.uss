@@ -1,0 +1,320 @@
+.content-area {
+    flex-direction: row;
+    background-color: rgb(30, 30, 30);
+    height: 100%;
+    justify-content: space-between;
+    flex-grow: 1;
+    flex-basis: 100%;
+}
+
+.preview-area {
+    background-color: rgb(34, 34, 34);
+    align-items: center;
+    border-right-color: rgb(68, 68, 68);
+    border-right-width: 1px;
+    align-content: center;
+    justify-content: center;
+    max-width: 25%;
+    width: 25%;
+}
+
+.unit-info {
+    flex-grow: 1;
+    padding: 10px;
+    background-color: rgb(43, 43, 43);
+}
+
+.tab-area {
+    background-color: rgb(34, 34, 34);
+    padding: 0;
+    border-left-color: rgb(68, 68, 68);
+    border-left-width: 1px;
+    width: 25%;
+    max-width: 25%;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.preview-container {
+    width: 250px;
+    height: 250px;
+    background-color: rgb(100, 100, 100);
+    display: flex;
+    align-items: center;
+    align-content: auto;
+    align-self: center;
+    justify-content: space-around;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.portrait-image {
+    -unity-background-scale-mode: scale-to-fit;
+    background-image: url("project://database/Assets/Sprites/Raven/Raven.png?fileID=21300000&guid=70dd79078e1259c4cab294577b18b75a&type=3#Raven");
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.unit-name-label {
+    top: auto;
+    position: relative;
+    visibility: visible;
+    color: rgb(226, 226, 226);
+    font-size: 28px;
+    align-self: center;
+    align-items: center;
+    translate: 0 -75px;
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    flex-basis: auto;
+    flex-shrink: initial;
+    flex-grow: initial;
+    flex-wrap: wrap;
+    transform-origin: top;
+}
+
+.unit-name-textfield {
+    -unity-text-align: middle-left;
+    color: rgb(226, 226, 226);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    font-size: 14px;
+}
+
+#UnitNameField #unity-text-input {
+    color: rgb(226, 226, 226);
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: rgb(34, 34, 34);
+    padding: 1px;
+}
+
+.unit-info-title {
+    align-self: auto;
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
+    color: rgb(226, 226, 226);
+    font-size: 16px;
+    margin: 2px;
+    padding-top: 2px;
+    padding-bottom: 8px;
+}
+
+.unity-sprite-field {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+#UnitSpriteField VisualElement {
+    font-size: 12px;
+    background-color: rgb(34, 34, 34);
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+}
+
+.unit-stats-title {
+    font-size: 16px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    color: rgb(226, 226, 226);
+    margin: 0;
+    padding: 4px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.stats-foldout {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+.special-stats-foldout {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+.character-info-title {
+    font-size: 16px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    color: rgb(226, 226, 226);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 8px;
+    padding-right: 4px;
+    padding-bottom: 8px;
+    padding-left: 4px;
+}
+
+.character-class-enum {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+#CharacterClassEnum VisualElement {
+    font-size: 12px;
+    background-color: rgb(34, 34, 34);
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    padding-left: 4px;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+}
+
+#CharacterClassEnum VisualElement VisualElement {
+    border-width: 0;
+    padding: 0;
+    margin-right: 4px;
+}
+
+.unit-prefab-field {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+#UnitPrefabField VisualElement {
+    font-size: 12px;
+    background-color: rgb(34, 34, 34);
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+}
+
+.character-element-enum {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+#CharacterElementEnum VisualElement {
+    font-size: 12px;
+    background-color: rgb(34, 34, 34);
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    padding-left: 4px;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+}
+
+#CharacterElementEnum VisualElement VisualElement {
+    border-width: 0;
+    padding: 0;
+    margin-right: 4px;
+}
+
+.ascencion-stat-enum {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+#AscencionStatEnum VisualElement {
+    font-size: 12px;
+    background-color: rgb(34, 34, 34);
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    padding-left: 4px;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+}
+
+#AscencionStatEnum VisualElement VisualElement {
+    border-width: 0;
+    padding: 0;
+    margin-right: 4px;
+}
+
+.character-skills-title {
+    font-size: 16px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    color: rgb(226, 226, 226);
+    margin: 0;
+    padding-top: 8px;
+    padding-right: 4px;
+    padding-bottom: 8px;
+    padding-left: 4px;
+}
+
+.tab-buttons-area {
+    width: 100%;
+    height: 5%;
+    max-height: 22px;
+    flex-direction: row;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height: initial;
+}
+
+.tabs-buttons {
+    margin: 0;
+    padding: 1px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    margin-right: 1px;
+    font-size: 16px;
+    background-color: rgb(43, 43, 43);
+    color: rgb(226, 226, 226);
+    border-width: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.tabs-buttons:hover {
+    background-color: rgb(48, 48, 48);
+    color: rgb(226, 226, 226);
+}
+
+.tabs-buttons.active {
+    background-color: rgb(52, 52, 52);
+    color: rgb(226, 226, 226);
+}
+
+.tabs-buttons.active:hover {
+    background-color: rgb(52, 52, 52);
+    color: rgb(226, 226, 226);
+}
+
+.tabs-content-area {
+    flex-shrink: 0;
+    justify-content: space-evenly;
+    width: 100%;
+    background-color: rgb(52, 52, 52);
+    flex-direction: column;
+    height: auto;
+    max-width: 100%;
+    align-content: stretch;
+    flex-grow: 1;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+}
+
+.tabs-content-area #unity-content-container {
+    align-content: stretch;
+}

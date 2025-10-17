@@ -1,0 +1,24 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Scripts/Editor/Unit/SkillCustomEditor/SkillEdiotrStyle.uss?fileID=7433441132597879392&amp;guid=c576796f68147674c81347adc475c274&amp;type=3#SkillEdiotrStyle" />
+    <ui:VisualElement name="ContentArea" class="content-area" style="max-width: 100%; height: 100%;">
+        <ui:Label text="Basic Info" name="BasicInformationTitle" class="title-label" />
+        <ui:TextField label="Skill Name" placeholder-text="filler text" name="SkillNameField" binding-path="skillName" class="skill-name-field" />
+        <ui:TextField label="Skill Description" placeholder-text="filler text" multiline="true" name="SkillDescriptionArea" binding-path="skillDescription" class="skill-description-area" />
+        <uie:ObjectField label="Object Field" name="SkillIconField" type="UnityEngine.Sprite, UnityEngine.CoreModule" binding-path="skillIcon" class="skill-icon-field" />
+        <ui:Label text="Skill Configuration" name="SkillConfigurationTitle" class="basic-info-title title-label" />
+        <ui:FloatField label="Mana Cost" value="20" name="ManaCostField" max-length="1000000" binding-path="manaCost" class="mana-cost-field" />
+        <ui:EnumField label="Skill Type" value="Center" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" name="SkillTypeEnum" binding-path="skillType" class="type-enum" />
+        <ui:EnumField label="Scaling Stat" value="Center" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" name="ScalingStatEnum" binding-path="scalingType" class="type-enum" />
+        <ui:Label text="Target Type" name="TargetTypeTitle" class="title-label" />
+        <ui:Toggle label="Is Self" name="IsSelfToggle" value="false" binding-path="isSelf" class="type-toggle" />
+        <ui:Toggle label="Is Main Target Ally" name="IsMainTargetAllyToggle" binding-path="isMainTargetAlly" class="type-toggle" />
+        <ui:Label text="Skill Effects" name="SkillEffectsTitle" class="title-label" />
+        <ui:VisualElement name="SkillEffectsArea" class="skill-effects-area">
+            <ui:VisualElement name="SkillEffectsContainer" class="skill-effect-container" />
+            <ui:VisualElement name="AddEffectContainer" class="add-effect-container">
+                <ui:DropdownField name="SkillEffectDropdown" class="skill-effect-dropdown" />
+                <ui:Button text="Add Effect" name="AddSkillEffectButton" class="skill-effect-add-button" style="width: 50%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

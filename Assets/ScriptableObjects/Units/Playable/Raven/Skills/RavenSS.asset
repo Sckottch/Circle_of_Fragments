@@ -18,7 +18,7 @@ MonoBehaviour:
   manaCost: 10
   skillType: 1
   scalingType: 1
-  isSelf: 0
-  isMainTargetAlly: 1
+  isSelf: 1
+  isMainTargetAlly: 0
   skillEffects:
   - {fileID: 11400000, guid: 69deacf3f2e81354a9d567d05cae684d, type: 2}

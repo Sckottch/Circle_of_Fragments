@@ -1,0 +1,33 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Scripts/Editor/Unit/PlayableUnitEditor/UI/PlayableUnitEditorWindow.uss?fileID=7433441132597879392&amp;guid=5c446af5de3fb2c448bf2a366fe1420c&amp;type=3#PlayableUnitEditorWindow" />
+    <ui:VisualElement name="Background" class="content-area">
+        <ui:VisualElement name="PreviewArea" class="preview-area">
+            <ui:Label text="Raven" name="UnitName" binding-path="unitName" class="unit-name-label" />
+            <ui:VisualElement name="PreviewContainer" class="preview-container">
+                <ui:VisualElement name="PortraitImage" class="portrait-image" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:ScrollView name="UnitInfo" vertical-scroller-visibility="Hidden" class="unit-info">
+            <ui:Label text="Unit Info" name="UnitInfoTitle" double-click-selects-word="true" class="unit-info-title" />
+            <ui:TextField label="Unit Name" placeholder-text="text" name="UnitNameField" binding-path="unitName" class="unit-name-textfield" />
+            <uie:ObjectField label="Unit Sprite" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="UnitSpriteField" binding-path="unitSprite" class="unity-sprite-field" />
+            <uie:ObjectField label="Unit Prefab" name="UnitPrefabField" type="PlayableUnit, Assembly-CSharp" binding-path="unitPrefab" class="unit-prefab-field" />
+            <ui:Label text="Unit Stats" name="UnitStatsTitle" class="unit-stats-title" />
+            <uie:PropertyField name="StatsPropertyField" binding-path="baseStats" />
+            <uie:PropertyField name="SpecialStatsPropertyField" binding-path="baseSpecialStats" />
+            <ui:Label text="Character Info&#10;" name="CharacterInfoTitle" class="character-info-title" />
+            <ui:EnumField label="Character Class" value="Warrior" type="CharacterClass, Assembly-CSharp" name="CharacterClassEnum" binding-path="characterClass" class="character-class-enum" />
+            <ui:EnumField label="Element" value="Dark" type="Element, Assembly-CSharp" name="CharacterElementEnum" binding-path="element" class="character-element-enum" />
+            <ui:EnumField label="Ascencion Stat" value="CritDamage" type="UnifiedStatType, Assembly-CSharp" name="AscencionStatEnum" binding-path="ascensionStat" class="ascencion-stat-enum" />
+        </ui:ScrollView>
+        <ui:VisualElement name="TabArea" class="tab-area" style="align-items: flex-start; align-content: center;">
+            <ui:VisualElement name="TabButtonsArea" class="tab-buttons-area">
+                <ui:Button text="Basic" name="BasicTabButton" class="tabs-buttons" />
+                <ui:Button text="Special" name="SpecialTabButton" class="tabs-buttons" />
+                <ui:Button text="Ultimate" name="UltimateTabButton" class="tabs-buttons" />
+                <ui:Button text="Passive" name="PassiveTabButton" class="tabs-buttons" />
+            </ui:VisualElement>
+            <ui:ScrollView name="TabsContentArea" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" mode="Vertical" class="tabs-content-area" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

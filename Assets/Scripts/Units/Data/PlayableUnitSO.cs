@@ -4,17 +4,14 @@ using UnityEngine;
 public class PlayableUnitSO : UnitBaseData
 {
     [Space(10)]
-    [Header("Character Info")]
-    public CharacterClass characterClass;
-
-
-    [Space(10)]
-    [Header("Character Prefab")]
+    [Header("Prefab")]
     public PlayableUnit unitPrefab;
 
     [Space(10)]
-    [Header("Element")]
+    [Header("Character Info")]
+    public CharacterClass characterClass;
     public Element element;
+    public UnifiedStatType ascensionStat; //Provavelmente sera substituido por uma classe que irá conter todos as informações necessarias para ascensão
 
     [Space(10)]
     [Header("Character Skills")]
@@ -22,9 +19,4 @@ public class PlayableUnitSO : UnitBaseData
     public SkillDataSO basicSkill;
     public SkillDataSO specialSkill;
     public SkillDataSO ultimateSkill;
-
-    [Space(10)]
-    [Header("Ascension Info")]
-    public UnifiedStatType ascensionStat; //Provavelmente sera substituido por uma classe que irá conter todos as informações necessarias para ascensão 
-
 }

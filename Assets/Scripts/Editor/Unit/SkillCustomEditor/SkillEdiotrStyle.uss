@@ -1,0 +1,179 @@
+.content-area {
+    flex-grow: 1;
+    background-color: rgb(52, 52, 52);
+    width: 100%;
+    max-width: 0;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.title-label {
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    color: rgb(226, 226, 226);
+    margin: 0;
+    padding-left: 2px;
+}
+
+.skill-name-field {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+.skill-name-field #unity-text-input {
+    color: rgb(226, 226, 226);
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: rgb(34, 34, 34);
+    padding: 1px;
+}
+
+.skill-description-area {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: upper-left;
+    flex-direction: column;
+}
+
+.skill-description-area #unity-text-input {
+    min-height: 80px;
+    padding: 2px;
+    color: rgb(226, 226, 226);
+    white-space: normal;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: rgb(34, 34, 34);
+    width: 100%;
+}
+
+.skill-icon-field {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+.skill-icon-field VisualElement {
+    font-size: 12px;
+    background-color: rgb(34, 34, 34);
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+}
+
+.mana-cost-field {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+.mana-cost-field #unity-text-input {
+    color: rgb(226, 226, 226);
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: rgb(34, 34, 34);
+    padding: 1px;
+    width: 100%;
+    height: 100%;
+    padding-left: 4px;
+}
+
+.type-enum {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+.type-enum VisualElement {
+    font-size: 12px;
+    background-color: rgb(34, 34, 34);
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    padding-left: 4px;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+}
+
+.type-enum VisualElement VisualElement {
+    border-width: 0;
+    padding: 0;
+    margin-right: 4px;
+}
+
+.type-toggle {
+    font-size: 14px;
+    color: rgb(226, 226, 226);
+    -unity-text-align: middle-left;
+}
+
+.type-toggle #unity-checkmark {
+    font-size: 12px;
+    background-color: rgb(34, 34, 34);
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+    -unity-background-image-tint-color: rgb(226, 226, 226);
+}
+
+.skill-effects-area {
+    margin: 16px;
+    padding: 4px;
+    background-color: rgb(60, 60, 60);
+    border-radius: 4px;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+    height: 100%;
+    min-height: 150px;
+}
+
+.skill-effect-container {
+    flex-grow: 1;
+    height: 100%;
+}
+
+.add-effect-container {
+    flex-grow: 1;
+    height: 30px;
+    align-items: stretch;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.skill-effect-dropdown {
+    width: 50%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.skill-effect-add-button {
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.skill-effect-dropdown VisualElement {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+}
+
+.remove-effect-button {
+    margin: 4px;
+}

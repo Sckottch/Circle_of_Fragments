@@ -7,9 +7,6 @@ public class UnitBaseData : ScriptableObject
 
     public string unitName;
     public Sprite unitSprite;
-
-    [Space(10)]
-    [Header("Unit Stats")]
     public Stats baseStats;
     public SpecialStats baseSpecialStats;
 }
