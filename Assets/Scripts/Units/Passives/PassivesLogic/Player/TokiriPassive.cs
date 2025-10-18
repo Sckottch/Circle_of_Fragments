@@ -16,7 +16,7 @@ public class TokiriPassive : PassiveBase
     private void HandleOnHit(Unit unit, float damage)
     {
         ownerUnit.ModifyActionValue(actionValueAdvance);
-        Debug.Log($"{ownerUnit.UnitData.unitName} was hit and gained {actionValueAdvance} action value from Tokiri's passive.");
+        Debug.Log($"{ownerUnit.UnitData.unitName} was hit and gained {actionValueAdvance}% action value from Tokiri's passive.");
     }
     public override void CleanUp()
     {

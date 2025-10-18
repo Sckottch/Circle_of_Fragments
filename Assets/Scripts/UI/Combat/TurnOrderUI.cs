@@ -1,18 +1,23 @@
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TurnOrderUI : MonoBehaviour
 {
     [SerializeField] private Transform ContentParent;
+    [SerializeField] private TextMeshProUGUI turnDataText;
 
     private List<GameObject> currentIcons = new();
 
 
-    public void SetupIcons(List<UnitTurnData> units)
+    public void SetupIcons(CurrentTurnData turnData)
     {
         Clear();
 
-        foreach (UnitTurnData unitData in units)
+        turnDataText.text = $"{turnData.CurrentTurn} /// {Math.Round(turnData.CurrentTurnActionValue)}";
+
+        foreach (UnitTurnData unitData in turnData.ActiveUnits)
         {
             CreateIcon(unitData.Unit, (int)unitData.CurrentActionValue);
         }
@@ -33,6 +38,8 @@ public class TurnOrderUI : MonoBehaviour
             Destroy(icon);
 
         currentIcons.Clear();
+
+        turnDataText.text = string.Empty;
     }
 
 

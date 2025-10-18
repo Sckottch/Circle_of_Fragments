@@ -28,7 +28,7 @@ public class UnitTurnData
     /// <param name="modifier">The percentage by which the action value will change. If positive advance | If negative delay</param>
     public void ApplyAVModifier(float modifier)
     {
-        float avModifier = CurrentActionValue * (modifier / 100);
+        float avModifier = (actionGauge / CurrentSpeed) * (modifier / 100);
 
         CurrentActionValue = Mathf.Max(0, CurrentActionValue - avModifier);
     }

@@ -7,11 +7,15 @@ using Unity.VisualScripting;
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] private TurnOrderUI turnOrderUI;
+    [SerializeField] private int turnActionValue;
 
     private List<PlayableUnit> playerUnits = new();
     private List<EnemyUnit> enemyUnits = new();
     private List<UnitTurnData> activeUnits = new();
 
+    private int currentTurn = 0;
+    private float currentTurnActionValue = 0f;
+    private int totalActions = 0;
 
     //Events
     public static event Action<Unit> OnTurnStarted;
@@ -58,6 +62,9 @@ public class TurnManager : MonoBehaviour
         activeUnits.AddRange(playerUnits.Select(unit => new UnitTurnData(unit)));
         activeUnits.AddRange(enemyUnits.Select(unit => new UnitTurnData(unit)));
 
+        currentTurnActionValue = turnActionValue;
+        totalActions = 0;
+
         UpdateUI();
     }
 
@@ -78,7 +85,7 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
-                unit.OnDeath += HandleEnemyUnitDeath; 
+                unit.OnDeath += HandleEnemyUnitDeath;
             }
 
         }
@@ -205,10 +212,27 @@ public class TurnManager : MonoBehaviour
         {
             data.ReduceActionValue(minActionValue);
         }
+
+        AddTurnActionValue(minActionValue);
+    }
+
+    private void AddTurnActionValue(float tickAmount)
+    {
+        currentTurnActionValue -= tickAmount;
+        totalActions++;
+
+        while (currentTurnActionValue <= 0)
+        {
+            currentTurn++;
+            currentTurnActionValue += turnActionValue;
+
+            Debug.Log($"Starting next turn; total actions in this turn: {totalActions}");
+            totalActions = 0;
+        }
     }
 
     private void HandleTurnEnd(Unit unit)
-    { 
+    {
         unit.SetMaterial(GameManager.Instance.gameResources.defaultMaterial);
 
         StartNextTurn();
@@ -225,7 +249,7 @@ public class TurnManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        turnOrderUI.SetupIcons(activeUnits.OrderBy(u => u.CurrentActionValue).ToList());
+        turnOrderUI.SetupIcons(new(currentTurn, currentTurnActionValue, activeUnits.OrderBy(u => u.CurrentActionValue).ToList()));
     }
 
     #endregion
@@ -261,6 +285,9 @@ public class TurnManager : MonoBehaviour
             }
         }
 
+        currentTurn = 0;
+        currentTurnActionValue = 0f;
+
         activeUnits.Clear();
         playerUnits.Clear();
         enemyUnits.Clear();
@@ -269,4 +296,18 @@ public class TurnManager : MonoBehaviour
     }
 
     #endregion
+}
+
+public class CurrentTurnData
+{
+    public int CurrentTurn { get; private set; }
+    public float CurrentTurnActionValue { get; private set; }
+    public List<UnitTurnData> ActiveUnits { get; private set; }
+
+    public CurrentTurnData(int currentTurn, float currentTurnActionValue, List<UnitTurnData> activeUnits)
+    {
+        CurrentTurn = currentTurn;
+        CurrentTurnActionValue = currentTurnActionValue;
+        ActiveUnits = activeUnits;
+    }
 }
