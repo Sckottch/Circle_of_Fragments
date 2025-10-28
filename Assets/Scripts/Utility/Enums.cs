@@ -124,3 +124,12 @@ public enum CharacterClass
     Ranger,
     Support
 }
+
+public enum GameMode
+{
+    None,
+    MainMenu,
+    GameLobby,
+    Expedition,
+    Combat
+}

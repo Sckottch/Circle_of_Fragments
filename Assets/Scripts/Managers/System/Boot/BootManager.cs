@@ -9,10 +9,6 @@ public class BootManager : MonoBehaviour
     [Header("GameSystemsRoot Prefab")]
     [SerializeField] private GameObject gameSystemsRootPrefab;
 
-    [Space(10)]
-    [Header("Cena Inicial")]
-    [SerializeField] private string initialSceneName = "MainMenu";
-
     private List<IInitializable> managers = new();
 
     private IEnumerator Start()
@@ -53,7 +49,9 @@ public class BootManager : MonoBehaviour
             yield return manager.Initialize();
         }
 
-        Debug.Log("Sequencia de Boot Concluida");
+        Debug.Log("Sequencia de Boot Concluida, Mudando para a cena do menu.");
+
+        GameManager.Instance.GoToMainMenu();
     }
 
     private List<IInitializable> SortManagers(List<IInitializable> managersToSort)
@@ -75,7 +73,7 @@ public class BootManager : MonoBehaviour
         AddManager<AudioManager>();
         AddManager<ProfileManager>();
         AddManager<PlayerManager>();
-        AddManager<SceneManager>();
+        AddManager<SceneLoader>();
         AddManager<GameManager>();
 
         foreach (IInitializable manager in managersToSort)
