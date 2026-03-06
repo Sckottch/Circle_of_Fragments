@@ -44,3 +44,12 @@ This approach allows modular gameplay systems and easier scalability.
 ## Project Status
 
 Prototype currently focused on combat systems and gameplay architecture.
+
+## Learning Goals
+
+This project was created to practice:
+
+- Game architecture
+- Modular combat systems
+- Turn-based combat design
+- Clean and scalable gameplay systems
