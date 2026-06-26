@@ -12,7 +12,7 @@ public class Profile
     public int CurrentGold { get; private set; }
     public int CurrentFragments { get; private set; }
     public List<PlayerUnitData> PlayerUnits { get; private set; } = new();
-    //Inventory will be added here later
+    public Inventory PlayerInventory { get; private set; } = new();
 
     public Profile(string playerName)
     {

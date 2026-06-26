@@ -10,6 +10,8 @@ using UnityEngine.Rendering.VirtualTexturing;
 [DisallowMultipleComponent]
 public abstract class Unit : MonoBehaviour
 {
+    public string UnitID { get; protected set; } = System.Guid.NewGuid().ToString();
+
     public string UnitName { get; protected set; }
 
     protected Stats baseStats;

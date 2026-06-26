@@ -133,3 +133,11 @@ public enum GameMode
     Expedition,
     Combat
 }
+
+public enum ItemCategory
+{
+    Material,
+    QuestItem,
+    Consumable,
+    Special
+}
