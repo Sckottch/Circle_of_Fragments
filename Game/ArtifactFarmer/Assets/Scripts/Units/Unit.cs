@@ -178,7 +178,7 @@ public abstract class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (CombatManager.IsWaitingTarget && IsAlive())
+        if (BattleManager.IsWaitingTarget && IsAlive())
         {
             OnUnitSelected?.Invoke(this);
         }

@@ -1,10 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.IO;
 using UnityEditor.Callbacks;
 using UnityEditor.UIElements;
-using UnityEditor.VersionControl;
 using System.Linq;
 
 public class PlayableUnitEditorWindow : EditorWindow
@@ -39,6 +37,7 @@ public class PlayableUnitEditorWindow : EditorWindow
     }
 
     [OnOpenAsset(0)]
+    [System.Obsolete]
     public static bool OnOpenAsset(int instanceID, int line)
     {
         var obj = EditorUtility.InstanceIDToObject(instanceID);

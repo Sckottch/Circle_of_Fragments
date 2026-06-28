@@ -141,3 +141,23 @@ public enum ItemCategory
     Consumable,
     Special
 }
+
+public enum CombatState
+{
+    Idle,
+    WaveStart,
+    Battle,
+    WaveEnd,
+    Victory, 
+    Defeat
+}
+
+public enum BattleState
+{
+    Idle,
+    TurnStart,
+    ActionSelection,
+    TargetSelection,
+    ActionResult,
+    TurnEnd
+}

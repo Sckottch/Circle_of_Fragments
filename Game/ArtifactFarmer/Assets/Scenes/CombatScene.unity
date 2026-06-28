@@ -511,6 +511,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -820,7 +821,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -884,7 +885,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionPanel: {fileID: 1136772987}
-  allyColor: {r: 0.068752214, g: 0.9716981, b: 0.08888339, a: 1}
+  allyColor:
+    r: 0.068752214
+    g: 0.9716981
+    b: 0.08888339
+    a: 1
+  currentUnit: {fileID: 0}
+  activeUnits: []
+  currentSkill: {fileID: 0}
+  isWaitingPlayerAction: 0
 --- !u!1 &1077083256
 GameObject:
   m_ObjectHideFlags: 0
