@@ -1,9 +1,6 @@
-using JetBrains.Annotations;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -178,7 +175,7 @@ public abstract class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (BattleManager.IsWaitingTarget && IsAlive())
+        if (CombatManager.Instance.Context.IsWaitingForTarget && IsAlive())
         {
             OnUnitSelected?.Invoke(this);
         }

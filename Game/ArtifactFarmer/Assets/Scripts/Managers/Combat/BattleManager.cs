@@ -20,24 +20,6 @@ public class BattleManager : MonoBehaviour
 
     private Action<Unit> onTargetSelected;
 
-    private void OnEnable()
-    {
-        GameManager.OnCombatEnd += HandleCombatEnd;
-        CombatSetup.OnEnemyUnitAdded += HandleEnemyUnitAdded;
-        WaveManager.OnWaveStarted += HandleWaveStarted;
-        WaveManager.OnWaveEnded += HandleWaveEnd;
-        TurnManager.OnTurnStarted += HandleTurnStart;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnCombatEnd -= HandleCombatEnd;
-        CombatSetup.OnEnemyUnitAdded -= HandleEnemyUnitAdded;
-        WaveManager.OnWaveStarted -= HandleWaveStarted;
-        WaveManager.OnWaveEnded -= HandleWaveEnd;
-        TurnManager.OnTurnStarted -= HandleTurnStart;
-    }
-
     #region Combat Setup
 
     private void HandleWaveStarted(List<PlayableUnit> playerUnits, List<EnemyUnit> enemyUnits)
@@ -142,7 +124,7 @@ public class BattleManager : MonoBehaviour
                 .OrderBy(_ => RandomManager.RangeFloat(0, 1))
                 .FirstOrDefault();
 
-            currentUnit.TurnAction(target, activeUnits, ActionType.BasicAttack);
+    currentUnit.TurnAction(target, activeUnits, ActionType.BasicAttack);
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -177,7 +159,7 @@ public class BattleManager : MonoBehaviour
 
         if (currentSkill.isSelf)
         {
-            unit.TurnAction(unit, activeUnits, actionType);
+    unit.TurnAction(unit, activeUnits, actionType);
             isWaitingPlayerAction = false;
             return;
         }

@@ -6,30 +6,7 @@ public class BuffSystem : MonoBehaviour
 {
     List<Unit> activeUnits = new List<Unit>();
 
-    private void OnEnable()
-    {
-        // Setup event listeners
-        WaveManager.OnWaveStarted += HandleWaveStart;
-        CombatSetup.OnEnemyUnitAdded += HandleEnemyUnitAdded;
 
-        // Buff event listeners
-        TurnManager.OnTurnStarted += HandleTurnStart;
-        TurnManager.OnTurnEnded += HandleTurnEnd;
-
-        // Cleanup event listeners
-        WaveManager.OnWaveEnded += HandleWaveEnd;
-        GameManager.OnCombatEnd += HandleCombatEnd;
-    }
-
-    private void OnDisable()
-    {
-        WaveManager.OnWaveStarted -= HandleWaveStart;
-        WaveManager.OnWaveEnded -= HandleWaveEnd;
-        CombatSetup.OnEnemyUnitAdded -= HandleEnemyUnitAdded;
-        GameManager.OnCombatEnd -= HandleCombatEnd;
-        TurnManager.OnTurnStarted -= HandleTurnStart;
-        TurnManager.OnTurnEnded -= HandleTurnEnd;
-    }
 
     #region Units Setup
 

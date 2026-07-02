@@ -20,24 +20,6 @@ public class TurnManager : MonoBehaviour
     public static event Action<Unit> OnTurnStarted;
     public static event Action<Unit> OnTurnEnded;
 
-    private void OnEnable()
-    {
-        GameManager.OnCombatEnd += HandleCombatEnd;
-        WaveManager.OnWaveStarted += HandleWaveStarted;
-        WaveManager.OnWaveEnded += HandleWaveEnd;
-        CombatSetup.OnEnemyUnitAdded += HandleEnemyUnitAdded;
-        OnTurnEnded += HandleTurnEnd;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnCombatEnd -= HandleCombatEnd;
-        WaveManager.OnWaveStarted -= HandleWaveStarted;
-        WaveManager.OnWaveEnded -= HandleWaveEnd;
-        CombatSetup.OnEnemyUnitAdded -= HandleEnemyUnitAdded;
-        OnTurnEnded -= HandleTurnEnd;
-    }
-
     private void HandleWaveStarted(List<PlayableUnit> playerUnits, List<EnemyUnit> enemyUnits)
     {
         Initialize(playerUnits, enemyUnits);
@@ -121,7 +103,7 @@ public class TurnManager : MonoBehaviour
             CombatEndResult result = new();
             result.playerWon = false;
 
-            GameManager.CombatEnd(result);
+            GameManager.Instance.CombatEnd(result);
         }
     }
 

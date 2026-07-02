@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WaveData", menuName = "ScriptableObjects/Combat/WaveData")]
 public class WaveDataSO : ScriptableObject
 {
+    public int maxEnemies = 5; // valor default
     public List<EnemySpawnInfo> enemies;
 }
 

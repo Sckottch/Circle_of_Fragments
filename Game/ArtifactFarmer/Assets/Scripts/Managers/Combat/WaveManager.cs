@@ -17,23 +17,7 @@ public class WaveManager : MonoBehaviour
     public static event Action<List<PlayableUnit>, List<EnemyUnit>> OnActiveUnitsUpdated;
     public static event Action OnWaveEnded;
 
-    private void OnEnable()
-    {
-        GameManager.OnCombatStart += HandleCombatStart;
-        CombatSetup.OnPlayerUnitsInitialized += HandlePlayerUnitsInitialized;
-        CombatSetup.OnEnemyUnitsInitialized += HandleEnemyUnitsInitialized;
-        OnActiveUnitsUpdated += HandleActiveUnitsUpdate;
-        OnWaveEnded += StartNextWave;
-    }
 
-    private void OnDisable()
-    {
-        GameManager.OnCombatStart -= HandleCombatStart;
-        CombatSetup.OnPlayerUnitsInitialized -= HandlePlayerUnitsInitialized;
-        CombatSetup.OnEnemyUnitsInitialized -= HandleEnemyUnitsInitialized;
-        OnActiveUnitsUpdated -= HandleActiveUnitsUpdate;
-        OnWaveEnded -= StartNextWave;
-    }
 
     private void HandleCombatStart(CombatData data)
     {
@@ -75,7 +59,6 @@ public class WaveManager : MonoBehaviour
             CombatEndResult result = new();
             result.playerWon = true;
 
-            GameManager.CombatEnd(result);
             return;
         }
 

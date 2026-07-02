@@ -3,14 +3,14 @@ using System.Linq;
 
 public static class TargetSystem
 {
-    public static bool IsValidTarget(Unit target, Unit caster, List<Unit> allTargets, SkillDataSO skillData)
+    public static bool IsValidTarget(Unit target, Unit caster, IReadOnlyList<Unit> allTargets, SkillDataSO skillData)
     {
         List<Unit> validTargets = GetValidTargets(caster, allTargets, skillData);
 
         return validTargets.Contains(target);
     }
 
-    public static List<Unit> GetValidTargets(Unit caster, List<Unit> allTargets, SkillDataSO skillData)
+    public static List<Unit> GetValidTargets(Unit caster, IReadOnlyList<Unit> allTargets, SkillDataSO skillData)
     {
         List<Unit> validTargets = new List<Unit>();
 

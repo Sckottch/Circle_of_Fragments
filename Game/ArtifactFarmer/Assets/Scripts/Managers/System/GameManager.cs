@@ -26,11 +26,11 @@ public class GameManager : ManagerBase<GameManager>
     {
         if (mode == CurrentGameMode)
         {
-            Debug.LogWarning($"O modo de jogo já está definido como '{mode}'.");
+            Debug.LogWarning($"O modo de jogo jï¿½ estï¿½ definido como '{mode}'.");
             return;
         }
 
-        //EndCurrentMode(CurrentGameMode); não implementado ainda para testes
+        //EndCurrentMode(CurrentGameMode); nÃ£o implementado ainda para testes
 
         CurrentGameMode = mode;
 
@@ -64,17 +64,17 @@ public class GameManager : ManagerBase<GameManager>
 
     #region Combat Functions
 
-    public static event Action<CombatData> OnCombatStart;
-    public static event Action<CombatEndResult> OnCombatEnd;
+    public event Action<CombatData> OnCombatStart;
+    public event Action<CombatEndResult> OnCombatEnd;
 
-    public static void CombatStart(CombatData data)
+    public void CombatStart(CombatData data)
     {
         Debug.Log("Combate Iniciado");
 
         OnCombatStart?.Invoke(data);
     }
 
-    public static void CombatEnd(CombatEndResult result)
+    public void CombatEnd(CombatEndResult result)
     {
         Debug.Log($"Combate encerrado. Vitoria: {result.playerWon}");
 

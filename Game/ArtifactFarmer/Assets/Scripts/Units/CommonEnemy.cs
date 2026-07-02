@@ -7,8 +7,6 @@ public class CommonEnemy : EnemyUnit
     public override EnemyCategory Category => EnemyCategory.Common;
     protected CommonEnemyDataSO EnemyData => UnitData as CommonEnemyDataSO;
 
-    private Skill skill;
-
     public override void Initialize(UnitBaseData unitData, int level = 1)
     {
         if (unitData is not CommonEnemyDataSO data)
@@ -32,20 +30,20 @@ public class CommonEnemy : EnemyUnit
         CurrentHealth = baseStats.health;
         CurrentMana = baseSpecialStats.mana;
 
-        skill = new Skill(this, EnemyData.enemySkill);
+        this.BasicSkill = new Skill(this, EnemyData.enemySkill);
     }
 
     public override bool TurnAction(Unit mainTarget, List<Unit> allTargets, ActionType action)
     {
-        if (skill == null)
+        if (BasicSkill == null)
         {
             Debug.LogError($"No Skill set for {UnitName}");
             return false;
         }
 
-        if (skill.HasEnoughMana())
+        if (BasicSkill.HasEnoughMana())
         {
-            skill.Execute(mainTarget, allTargets);
+            BasicSkill.Execute(mainTarget, allTargets);
             return true;
         }
         else

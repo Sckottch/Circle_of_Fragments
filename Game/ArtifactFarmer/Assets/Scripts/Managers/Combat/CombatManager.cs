@@ -1,11 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 public class CombatManager : SingletonMonoBehaviour<CombatManager>
 {
+    [Header("Referencias")]
+    [SerializeField] private CombatSetup combatSetup;
+
+    [SerializeField] private CombatUIManager combatUIManager;
+
     public CombatContext Context { get; private set; }
+    public CombatSetup CombatSetup => combatSetup;
+    public CombatUIManager CombatUIManager => combatUIManager;
 
     private CombatStateMachine combatStateMachine = new ();
-    public CombatState CurrentState { get; private set; }
+    public CombatState CurrentState { get; private set; } = CombatState.Idle;
+    public CombatData CurrentCombatData { get; private set; }
 
     //States
     private IdleCombatState idleState = new ();
@@ -13,10 +22,23 @@ public class CombatManager : SingletonMonoBehaviour<CombatManager>
     private BattleCombatState battleState = new ();
     private WaveEndCombatState waveEndState = new ();
     private VictoryCombatState victoryState = new ();
-    private DefeatCombatState deafeatState = new ();
+    private DefeatCombatState defeatState = new ();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        GameManager.Instance.OnCombatStart += StartCombat;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnCombatStart -= StartCombat;
+    }
 
     public void ChangeCombatState(CombatState state)
     {
+        CurrentState = state;
+
         switch (state)
         {
             case CombatState.Idle:
@@ -40,15 +62,23 @@ public class CombatManager : SingletonMonoBehaviour<CombatManager>
                 break;
 
             case CombatState.Defeat:
-                combatStateMachine.ChangeState(deafeatState);
+                combatStateMachine.ChangeState(defeatState);
                 break;            
 
             default: break;
         }
     }
-    
-    public void ChangeBattleState(BattleState state)
+
+    private void StartCombat(CombatData data)
     {
-        battleState.ChangeState(state);
+        CurrentCombatData = data;
+        ChangeCombatState(CombatState.Idle);
     }
+
+    public void StartRoutine(IEnumerator routine)
+    {
+        StartCoroutine(routine);
+    }
+
+    public void SetCurrentContext(CombatContext context) => Context = context;
 }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using System;
 using UnityEngine;
 
 public class CombatUIManager : MonoBehaviour
@@ -8,6 +8,7 @@ public class CombatUIManager : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Transform playerHUDGroup;
     [SerializeField] private Transform enemyHUDGroup;
+    [SerializeField] private ActionPanel actionPanel;
 
     private GameResources resources;
 
@@ -44,6 +45,16 @@ public class CombatUIManager : MonoBehaviour
 
     }
 
+    public void OpenActionPanel(Unit unit, Action<Unit, ActionType> callback)
+    {
+        actionPanel.Open(unit, callback);
+    }
+
+    public void CloseActionPanel()
+    {
+        actionPanel.Close();
+    }
+    
     public void AddUnit(Unit unit)
     {
         if (unit.IsPlayer)
