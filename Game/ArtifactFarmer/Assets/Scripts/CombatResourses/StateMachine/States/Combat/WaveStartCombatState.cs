@@ -29,6 +29,7 @@ public class WaveStartCombatState : ICombatState
 
         context.SetActiveUnits(activeUnits);
 
+        CombatManager.Instance.Events.WaveStarted(activeUnits);
         CombatManager.Instance.ChangeCombatState(CombatState.Battle);
     }
 }

@@ -6,20 +6,6 @@ public class PassiveManager : SingletonMonoBehaviour<PassiveManager>
     public Dictionary<Unit, PassiveBase> AllPassives { get; private set; } = new Dictionary<Unit, PassiveBase>();
     public List<Unit> ActiveUnits { get; private set; } = new List<Unit>();
 
-    private void OnEnable()
-    {
-        WaveManager.OnWaveStarted += HandleWaveStarted;
-        WaveManager.OnWaveEnded += HandleWaveEnded;
-        //CombatSetup.OnEnemyUnitAdded += HandleEnemyUnitAdded;
-    }
-
-    private void OnDisable()
-    {
-        WaveManager.OnWaveStarted -= HandleWaveStarted;
-        WaveManager.OnWaveEnded -= HandleWaveEnded;
-        //CombatSetup.OnEnemyUnitAdded -= HandleEnemyUnitAdded;
-    }
-
     #region Setup
 
     private void HandleWaveStarted(List<PlayableUnit> playerUnits, List<EnemyUnit> enemyUnits)

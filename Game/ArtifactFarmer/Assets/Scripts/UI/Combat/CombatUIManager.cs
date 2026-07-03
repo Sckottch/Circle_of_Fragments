@@ -9,6 +9,7 @@ public class CombatUIManager : MonoBehaviour
     [SerializeField] private Transform playerHUDGroup;
     [SerializeField] private Transform enemyHUDGroup;
     [SerializeField] private ActionPanel actionPanel;
+    [SerializeField] private TurnOrderUI turnOrderUI;
 
     private GameResources resources;
 
@@ -17,32 +18,39 @@ public class CombatUIManager : MonoBehaviour
         resources = GameManager.Instance.gameResources;
     }
 
-    public void SetupUI(List<PlayableUnit> playerUnits, List<EnemyUnit> enemyUnits)
+    public void SubscribeUIEvents()
     {
-        foreach (Unit unit in playerUnits)
-        {
-            GameObject hud = Instantiate(resources.unitHUDPrefab, playerHUDGroup);
-            hud.GetComponent<UnitHUD>().SetUnit(unit);
-        }
+        turnOrderUI.SubscribeEvents();
+    }
 
-        foreach (EnemyUnit unit in enemyUnits)
-        {
-            GameObject prefab;
+    public void UnsubscribeUIEvents()
+    {
+        turnOrderUI.UnsubscribeEvents();
+    }
 
-            if (unit.Category == EnemyCategory.Boss)
+    public void SetupUI(List<Unit> activeUnits)
+    {
+        foreach (Unit unit in activeUnits)
+        {
+            GameObject hud;
+
+            if (unit.IsPlayer)
             {
-                prefab = resources.unitHUDPrefab;
-                GameObject hud = Instantiate(prefab, enemyHUDGroup);
+                hud = Instantiate(resources.unitHUDPrefab, playerHUDGroup);
                 hud.GetComponent<UnitHUD>().SetUnit(unit);
+                continue;
             }
-            else
-            {
-                prefab = resources.enemyUnitHUDPrefab;
-                GameObject hud = Instantiate(prefab, enemyHUDGroup);
-                hud.GetComponent<CommonEnemyUnitHUD>().SetUnit(unit);
-            }
-        }
 
+            if (unit is EnemyUnit { Category: EnemyCategory.Boss })
+            {
+                hud = Instantiate(resources.unitHUDPrefab, enemyHUDGroup);
+                hud.GetComponent<UnitHUD>().SetUnit(unit);
+                continue;
+            }
+
+            hud = Instantiate(resources.enemyUnitHUDPrefab, enemyHUDGroup);
+            hud.GetComponent<CommonEnemyUnitHUD>().SetUnit(unit);
+        }
     }
 
     public void OpenActionPanel(Unit unit, Action<Unit, ActionType> callback)

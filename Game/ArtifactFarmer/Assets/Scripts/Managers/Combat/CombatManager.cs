@@ -15,7 +15,9 @@ public class CombatManager : SingletonMonoBehaviour<CombatManager>
     private CombatStateMachine combatStateMachine = new ();
     public CombatState CurrentState { get; private set; } = CombatState.Idle;
     public CombatData CurrentCombatData { get; private set; }
-
+    public CombatEvents Events { get; private set; }
+    private CombatListener listener;
+    
     //States
     private IdleCombatState idleState = new ();
     private WaveStartCombatState waveStartState = new ();
@@ -28,11 +30,14 @@ public class CombatManager : SingletonMonoBehaviour<CombatManager>
     {
         base.Awake();
         GameManager.Instance.OnCombatStart += StartCombat;
+        GameManager.Instance.OnCombatEnd += EndCombat;
+        RandomManager.Init();
     }
 
     private void OnDisable()
     {
         GameManager.Instance.OnCombatStart -= StartCombat;
+        GameManager.Instance.OnCombatEnd -= EndCombat;
     }
 
     public void ChangeCombatState(CombatState state)
@@ -71,8 +76,18 @@ public class CombatManager : SingletonMonoBehaviour<CombatManager>
 
     private void StartCombat(CombatData data)
     {
+        Events = new CombatEvents();
+        listener = new CombatListener(Events);
+        combatUIManager.SubscribeUIEvents();
         CurrentCombatData = data;
         ChangeCombatState(CombatState.Idle);
+    }
+
+    private void EndCombat(CombatEndResult result)
+    {
+        listener.Dispose();
+        combatUIManager.UnsubscribeUIEvents();
+        Events = null;
     }
 
     public void StartRoutine(IEnumerator routine)

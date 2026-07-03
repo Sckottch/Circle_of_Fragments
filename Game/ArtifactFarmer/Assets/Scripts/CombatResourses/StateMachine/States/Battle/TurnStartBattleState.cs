@@ -20,6 +20,7 @@ public class TurnStartBattleState : ICombatState
 
         context.SetActiveUnit(unit);
         data.RecalculateActionValue();
+        CombatManager.Instance.Events.TurnOrderChanged();
 
         if (!unit.CanAct())
         {
@@ -27,6 +28,7 @@ public class TurnStartBattleState : ICombatState
             return;
         }
 
+        
 
         battleState.ChangeState(BattleState.ActionSelection);
     }

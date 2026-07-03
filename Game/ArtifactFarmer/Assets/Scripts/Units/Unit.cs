@@ -7,7 +7,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public abstract class Unit : MonoBehaviour
 {
-    public string UnitID { get; protected set; } = System.Guid.NewGuid().ToString();
+    public string UnitID { get; protected set; } = Guid.NewGuid().ToString();
 
     public string UnitName { get; protected set; }
 
@@ -33,7 +33,7 @@ public abstract class Unit : MonoBehaviour
     public event Action<Unit> OnDeath;
     public event Action OnManaChanged;
     public event Action<Unit> OnUnitSelected;
-    public event Action<Unit, float> OnAVModify;
+    public event Action<Unit, float> OnAVModify; // TODO: mever esse evento para combatEvents
     public event Action<Unit, Buff, Unit> OnBuffApplied;
     public event Action<Unit, Buff> OnBuffRemoved;
     public event Action<Unit> OnSpeedChanged;
@@ -117,11 +117,14 @@ public abstract class Unit : MonoBehaviour
     public void Death(Unit unit)
     {
         OnDeath?.Invoke(unit);
+        CombatManager.Instance.Events.UnitDied(this);
+        gameObject.SetActive(false);
     }
 
     public void ModifyActionValue(float percentage)
     {
         OnAVModify?.Invoke(this, percentage);
+        //CombatManager.Instance.Events.TurnOrderChanged(); TODO: mover atualização da fila para na reação do evento, após a fila ser atualizada
     }
 
     public void ApplyBuff(Buff buff, Unit caster)
@@ -178,7 +181,10 @@ public abstract class Unit : MonoBehaviour
         if (CombatManager.Instance.Context.IsWaitingForTarget && IsAlive())
         {
             OnUnitSelected?.Invoke(this);
+            Debug.Log("Unit Targeted");
         }
+        
+        Debug.Log($"{UnitName} got clicked");
     }
 
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4df5995d3e584e145b6e4e45ad556278, type: 3}
   m_Name: WaveData
   m_EditorClassIdentifier: 
+  maxEnemies: 5
   enemies:
   - enemyData: {fileID: 11400000, guid: ba1b91c08473a124693baf129f7aa049, type: 2}
     offset: {x: 0, y: 0, z: 0}
@@ -23,7 +24,3 @@ MonoBehaviour:
     offset: {x: 3, y: 1.5, z: 0}
   - enemyData: {fileID: 11400000, guid: ba1b91c08473a124693baf129f7aa049, type: 2}
     offset: {x: 3, y: -1.5, z: 0}
-  - enemyData: {fileID: 11400000, guid: ba1b91c08473a124693baf129f7aa049, type: 2}
-    offset: {x: 6, y: 0, z: 0}
-  - enemyData: {fileID: 11400000, guid: ba1b91c08473a124693baf129f7aa049, type: 2}
-    offset: {x: 6, y: 0, z: 0}
