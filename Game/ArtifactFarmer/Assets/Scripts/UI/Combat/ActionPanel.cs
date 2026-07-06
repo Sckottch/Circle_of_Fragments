@@ -18,38 +18,26 @@ public class ActionPanel : MonoBehaviour
             return;
         }
 
-        currentUnit = unit as PlayableUnit;
-        onActionSelected = callBack;
-
         gameObject.SetActive(true);
         Clear();
 
-        if (currentUnit.BasicSkill != null)
+        CreateButton(unit.GetSkill(ActionType.BasicAttack), () =>
         {
-            CreateButton(currentUnit.BasicSkill, () =>
-            {
-                onActionSelected?.Invoke(currentUnit, ActionType.BasicAttack);
-                Close();
-            });
-        }
-
-        if (currentUnit.SpecialSkill != null)
+            callBack.Invoke(unit, ActionType.BasicAttack);
+            Close();
+        });
+        
+        CreateButton(unit.GetSkill(ActionType.Skill), () =>
         {
-            CreateButton(currentUnit.SpecialSkill, () =>
-            {
-                onActionSelected?.Invoke(currentUnit, ActionType.Skill);
-                Close();
-            });
-        }
-
-        if (currentUnit.UltimateSkill != null)
+            callBack.Invoke(unit, ActionType.Skill);
+            Close();
+        });
+        
+        CreateButton(unit.GetSkill(ActionType.Ultimate), () =>
         {
-            CreateButton(currentUnit.UltimateSkill, () =>
-            {
-                onActionSelected?.Invoke(currentUnit, ActionType.Ultimate);
-                Close();
-            });
-        }
+            callBack.Invoke(unit, ActionType.Ultimate);
+            Close();
+        });
     }
 
     public void Close()

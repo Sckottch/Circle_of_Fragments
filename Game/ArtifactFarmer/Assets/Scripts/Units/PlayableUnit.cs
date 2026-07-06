@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayableUnit : Unit
@@ -7,10 +6,6 @@ public class PlayableUnit : Unit
 
     protected PlayableUnitSO PlayerData => (PlayableUnitSO)UnitData;
     public Element Element { get; protected set; }
-
-    public Skill BasicSkill { get; protected set; }
-    public Skill SpecialSkill { get; protected set; }
-    public Skill UltimateSkill { get; protected set; }
 
     public UnitProgression UnitLevel { get; protected set; }
 
@@ -42,19 +37,14 @@ public class PlayableUnit : Unit
         this.lastHealth = UnitLevel.GetStats().health;
 
         //Skills Setup
-        BasicSkill = new Skill(this, PlayerData.basicSkill);
-        SpecialSkill = new Skill(this, PlayerData.specialSkill);
-        UltimateSkill = new Skill(this, PlayerData.ultimateSkill);
+        skills.Add(new Skill(this, PlayerData.basicSkill));
+        skills.Add(new Skill(this, PlayerData.specialSkill));
+        skills.Add(new Skill(this, PlayerData.ultimateSkill));
     }
 
     public void InitializeFromPlayerData(PlayerUnitData data)
     {
         Initialize(data.unitData, data.experience);
-    }
-
-    public override bool TurnAction(Unit mainTarget, List<Unit> allTargets, ActionType action)
-    {
-        return UseSkill(action, mainTarget, allTargets);
     }
 
     public override Stats GetStats()
@@ -67,35 +57,14 @@ public class PlayableUnit : Unit
         return UnitLevel.GetSpecialStats();
     }
 
-    protected bool UseSkill(ActionType action, Unit mainTarget, List<Unit> allTargets)
+    public override Skill GetSkill(ActionType type)
     {
-        Skill skill = null;
-        bool isSkillUsed = false;
-
-        switch (action)
+        if (type is ActionType.Enemy or ActionType.Passive)
         {
-            case ActionType.BasicAttack:
-                skill = BasicSkill;
-                break;
-            case ActionType.Skill:
-                skill = SpecialSkill;
-                break;
-            case ActionType.Ultimate:
-                skill = UltimateSkill;
-                break;
+            Debug.LogError("ActionType inválido para skill de player");
+            return null;
         }
 
-        if (skill != null)
-        {
-            SkillUsed(this, mainTarget, allTargets, skill);
-            SkillResult skillResult = skill.Execute(mainTarget, allTargets);
-            CallSkillResult(skillResult);
-            
-            isSkillUsed = skillResult != null;
-        }
-
-        Debug.Log($"{UnitName} used Skill {skill.SkillData.skillName} used on {mainTarget.UnitName}");
-
-        return isSkillUsed;
+        return skills.Find(u => u.SkillData.skillType == type);
     }
 }

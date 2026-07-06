@@ -3,7 +3,8 @@ public enum ActionType
     BasicAttack,
     Skill,
     Ultimate,
-    Passive
+    Passive,
+    Enemy
 }
 
 public enum StatType 

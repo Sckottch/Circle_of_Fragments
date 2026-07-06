@@ -7,7 +7,6 @@ public abstract class EnemyUnit : Unit
 
     public List<Element> ElementalWeaknesses { get; protected set; }
     public Element ElementalResistance { get; protected set; }
-    public Skill BasicSkill { get; protected set; }
 }
 
 public enum EnemyCategory

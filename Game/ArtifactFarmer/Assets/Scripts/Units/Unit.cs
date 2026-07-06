@@ -13,13 +13,14 @@ public abstract class Unit : MonoBehaviour
 
     protected Stats baseStats;
     protected SpecialStats baseSpecialStats;
+    protected List<Skill> skills = new ();
 
     protected float lastHealth;
 
     public float CurrentHealth {get; protected set; }
     public float CurrentMana { get; protected set; }
 
-    public List<Buff> ActiveBuffs { get; private set; } = new List<Buff>();
+    public List<Buff> ActiveBuffs { get; private set; } = new ();
 
     public abstract bool IsPlayer { get; }
 
@@ -49,7 +50,7 @@ public abstract class Unit : MonoBehaviour
 
     public abstract void Initialize(UnitBaseData unitData, int experience = 0);
 
-    public abstract bool TurnAction(Unit mainTarget, List<Unit> allTargets, ActionType action);
+    public abstract Skill GetSkill(ActionType type);
 
     public virtual Stats GetStats()
     {

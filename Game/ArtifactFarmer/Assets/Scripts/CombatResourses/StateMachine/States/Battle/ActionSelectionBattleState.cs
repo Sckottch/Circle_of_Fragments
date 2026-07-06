@@ -22,8 +22,7 @@ public class ActionSelectionBattleState : ICombatState
 
         if (!unit.IsPlayer)
         {
-            EnemyUnit enemy = unit as EnemyUnit;
-            context.SetCurrentSkill(enemy.BasicSkill);
+            context.SetCurrentSkill(unit.GetSkill(ActionType.Enemy));
             battleState.ChangeState(BattleState.TargetSelection);
             yield break;
         }
@@ -40,28 +39,8 @@ public class ActionSelectionBattleState : ICombatState
     private void SkillSelectionSignal(Unit unit, ActionType type)
     {
         CombatContext context = CombatManager.Instance.Context;
-        PlayableUnit playerUnit = unit as PlayableUnit;
-
-        if (playerUnit == null)
-        {
-            isWaitingForPlayer = false;
-            return;
-        }
         
-        switch (type)
-        {
-            case ActionType.BasicAttack:
-                context.SetCurrentSkill(playerUnit.BasicSkill);
-                break;
-            
-            case ActionType.Skill:
-                context.SetCurrentSkill(playerUnit.SpecialSkill);
-                break;
-                
-            case ActionType.Ultimate:
-                context.SetCurrentSkill(playerUnit.UltimateSkill);
-                break;
-        }
+        context.SetCurrentSkill(unit.GetSkill(type));
 
         CombatManager.Instance.CombatUIManager.CloseActionPanel();
         isWaitingForPlayer = false;

@@ -30,27 +30,11 @@ public class CommonEnemy : EnemyUnit
         CurrentHealth = baseStats.health;
         CurrentMana = baseSpecialStats.mana;
 
-        this.BasicSkill = new Skill(this, EnemyData.enemySkill);
+        skills.Add(new Skill(this, EnemyData.enemySkill));
     }
 
-    public override bool TurnAction(Unit mainTarget, List<Unit> allTargets, ActionType action)
+    public override Skill GetSkill(ActionType type)
     {
-        if (BasicSkill == null)
-        {
-            Debug.LogError($"No Skill set for {UnitName}");
-            return false;
-        }
-
-        if (BasicSkill.HasEnoughMana())
-        {
-            BasicSkill.Execute(mainTarget, allTargets);
-            return true;
-        }
-        else
-        {
-            Debug.Log($"{UnitName} does not have enough mana to use the skill.");
-            return false;
-        }
+        return type != ActionType.Enemy ? null : skills[0];
     }
-
 }
