@@ -10,7 +10,6 @@ public class PlayableUnitSO : UnitBaseData
     [Space(10)]
     [Header("Character Info")]
     public CharacterClass characterClass;
-    public Element element;
     public UnifiedStatType ascensionStat; //Provavelmente sera substituido por uma classe que irá conter todos as informações necessarias para ascensão
 
     [Space(10)]

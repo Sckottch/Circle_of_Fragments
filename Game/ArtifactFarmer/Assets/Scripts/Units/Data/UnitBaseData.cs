@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class UnitBaseData : ScriptableObject
 {
@@ -9,6 +10,12 @@ public class UnitBaseData : ScriptableObject
     public Sprite unitSprite;
     public Stats baseStats;
     public SpecialStats baseSpecialStats;
+    
+    [Space(10)]
+    [Header("Elemental Profile")]
+    public Element element;
+    public List<Element> elementalWeaknesses;
+    public Element elementalResistance;
 }
 
 [System.Serializable]

@@ -21,8 +21,8 @@ public class CommonEnemy : EnemyUnit
         baseStats = EnemyData.baseStats;
         baseSpecialStats = EnemyData.baseSpecialStats;
 
-        ElementalWeaknesses = EnemyData.elementalWeaknesses;
-        ElementalResistance = EnemyData.elementalResistance;
+        ElementalProfile = new ElementalProfile(EnemyData.element, EnemyData.elementalWeaknesses,
+            EnemyData.elementalResistance);
 
         spriteRenderer.sprite = EnemyData.unitSprite;
 

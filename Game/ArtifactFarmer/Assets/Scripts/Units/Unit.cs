@@ -14,6 +14,7 @@ public abstract class Unit : MonoBehaviour
     protected Stats baseStats;
     protected SpecialStats baseSpecialStats;
     protected List<Skill> skills = new ();
+    public ElementalProfile ElementalProfile { get; protected set; }
 
     protected float lastHealth;
 
@@ -34,14 +35,10 @@ public abstract class Unit : MonoBehaviour
     public event Action<Unit> OnDeath;
     public event Action OnManaChanged;
     public event Action<Unit> OnUnitSelected;
-    public event Action<Unit, float> OnAVModify; // TODO: mever esse evento para combatEvents
-    public event Action<Unit, Buff, Unit> OnBuffApplied;
-    public event Action<Unit, Buff> OnBuffRemoved;
-    public event Action<Unit> OnSpeedChanged;
     public event Action<Unit> OnMaxHealthChanged;
     public event Action<Unit, float> OnHit;
-    public event Action<Unit, Unit, List<Unit>, Skill> OnSkillUsed;
-    public event Action<Unit, SkillResult> OnSkillResult;
+    // public event Action<Unit, Buff, Unit> OnBuffApplied; TODO: avaliar se os eventos de buff ficam no unit, e se for o caso movê-los ao local correto
+    // public event Action<Unit, Buff> OnBuffRemoved; 
 
     protected void Awake()
     {
@@ -124,33 +121,22 @@ public abstract class Unit : MonoBehaviour
 
     public void ModifyActionValue(float percentage)
     {
-        OnAVModify?.Invoke(this, percentage);
-        //CombatManager.Instance.Events.TurnOrderChanged(); TODO: mover atualização da fila para na reação do evento, após a fila ser atualizada
+        CombatManager.Instance.Events.AVModified(this, percentage);
     }
 
     public void ApplyBuff(Buff buff, Unit caster)
     {
-        OnBuffApplied?.Invoke(this, buff, caster);
+        //OnBuffApplied?.Invoke(this, buff, caster);
     }
 
     public void RemoveBuff(Buff buff)
     {
-        OnBuffRemoved?.Invoke(this, buff);
+        //OnBuffRemoved?.Invoke(this, buff);
     }
 
     public void SpeedChanged()
     {
-        OnSpeedChanged?.Invoke(this);
-    }
-
-    public void SkillUsed(Unit caster, Unit mainTarget, List<Unit> allTargets, Skill skill)
-    {
-        OnSkillUsed?.Invoke(caster, mainTarget, allTargets, skill);
-    }
-
-    public void CallSkillResult(SkillResult result)
-    {
-        OnSkillResult?.Invoke(this, result);
+        CombatManager.Instance.Events.SpeedChanged(this);
     }
 
     public void MaxHealthChanged()
@@ -187,5 +173,4 @@ public abstract class Unit : MonoBehaviour
         
         Debug.Log($"{UnitName} got clicked");
     }
-
 }

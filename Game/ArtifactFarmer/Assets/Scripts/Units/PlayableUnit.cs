@@ -5,7 +5,6 @@ public class PlayableUnit : Unit
     public override bool IsPlayer => true;
 
     protected PlayableUnitSO PlayerData => (PlayableUnitSO)UnitData;
-    public Element Element { get; protected set; }
 
     public UnitProgression UnitLevel { get; protected set; }
 
@@ -26,7 +25,8 @@ public class PlayableUnit : Unit
         this.baseStats = PlayerData.baseStats;
         this.baseSpecialStats = PlayerData.baseSpecialStats;
 
-        this.Element = PlayerData.element;
+        this.ElementalProfile = new ElementalProfile(PlayerData.element, PlayerData.elementalWeaknesses,
+            PlayerData.elementalResistance);
 
         this.CurrentMana = PlayerData.baseSpecialStats.mana;
 

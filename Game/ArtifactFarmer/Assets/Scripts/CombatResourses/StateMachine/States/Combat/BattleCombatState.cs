@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class BattleCombatState : ICombatState
 {
     private CombatStateMachine battleStateMachine = new ();
@@ -14,11 +12,11 @@ public class BattleCombatState : ICombatState
 
     public BattleCombatState()
     {
-        turnStartState = new (this);
-        actionSelectionState = new (this);
-        targetSelectionState = new (this);
-        actionResultState = new (this);
-        turnEndState = new (this);
+        turnStartState = new TurnStartBattleState(this);
+        actionSelectionState = new ActionSelectionBattleState(this);
+        targetSelectionState = new TargetSelectionBattleState(this);
+        actionResultState = new ActionResultBattleState(this);
+        turnEndState = new TurnEndBattleState(this);
     }
 
     public void Enter()

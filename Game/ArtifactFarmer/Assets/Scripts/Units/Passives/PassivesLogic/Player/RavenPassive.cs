@@ -9,7 +9,7 @@ public class RavenPassive : PassiveBase
     public override void Initialize(Unit unit)
     {
         ownerUnit = unit;
-        ownerUnit.OnSkillResult += HandleSkillResult;
+        // ownerUnit.OnSkillResult += HandleSkillResult;
         ownerUnit.OnMaxHealthChanged += UpdateMaxLifestealAmount;
 
         UpdateMaxLifestealAmount(ownerUnit);
@@ -25,7 +25,6 @@ public class RavenPassive : PassiveBase
         if(result.DamageDealt > 0)
         {
             float lifeStealAmount = result.DamageDealt * lifeStealPercentage / 100f;
-
             if (lifeStealAmount > maxLifeStealAmount)
             {
                 lifeStealAmount = maxLifeStealAmount;
@@ -38,7 +37,7 @@ public class RavenPassive : PassiveBase
     
     public override void CleanUp()
     {
-        ownerUnit.OnSkillResult -= HandleSkillResult;
+        // ownerUnit.OnSkillResult -= HandleSkillResult;
         ownerUnit.OnMaxHealthChanged -= UpdateMaxLifestealAmount;
     }
 }

@@ -19,7 +19,7 @@ public class BuffSystem : MonoBehaviour
         foreach(Unit unit in activeUnits)
         {
             unit.OnDeath += HandleUnitDeath;
-            unit.OnBuffApplied += HandleBuffApplied;
+            // unit.OnBuffApplied += HandleBuffApplied;
         }
 
         Debug.Log($"BuffSystem started with {activeUnits.Count} active units.");
@@ -31,7 +31,7 @@ public class BuffSystem : MonoBehaviour
         {
             activeUnits.Add(enemyUnit);
             enemyUnit.OnDeath += HandleUnitDeath;
-            enemyUnit.OnBuffApplied += HandleBuffApplied;
+            // enemyUnit.OnBuffApplied += HandleBuffApplied;
         }
 
         Debug.Log($"BuffSystem: Enemy unit added: {enemyUnit.UnitName}. Total active units: {activeUnits.Count}");
@@ -42,7 +42,7 @@ public class BuffSystem : MonoBehaviour
         activeUnits.Remove(unit);
 
         unit.OnDeath -= HandleUnitDeath;
-        unit.OnBuffApplied -= HandleBuffApplied;
+        // unit.OnBuffApplied -= HandleBuffApplied;
     }
 
     #endregion
@@ -152,7 +152,7 @@ public class BuffSystem : MonoBehaviour
         foreach (Unit unit in activeUnits)
         {
             unit.OnDeath -= HandleUnitDeath;
-            unit.OnBuffApplied -= HandleBuffApplied;
+            // unit.OnBuffApplied -= HandleBuffApplied;
         }
 
         activeUnits.Clear();

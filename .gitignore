@@ -24,6 +24,7 @@ Game/ArtifactFarmer/.vscode/
 
 # JetBrains Rider
 Game/ArtifactFarmer/.idea/
+*.sln.DotSettings
 
 # Obsidian volatile workspace state
 Docs/CircleOfFragments/.obsidian/workspace.json

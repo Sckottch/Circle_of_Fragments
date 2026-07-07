@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class UnitProgression
@@ -22,7 +21,7 @@ public class UnitProgression
         this.baseSpecialStats = baseSpecialStats;
         CurrentLevel = 1;
         GainExperience(experience);
-        //temporário até a implementação do sistema de ascensão
+        //temporï¿½rio atï¿½ a implementaï¿½ï¿½o do sistema de ascensï¿½o
         CurrentAscensionLevel = Mathf.FloorToInt(CurrentLevel / (float)ascensionLevel);
     }
     
@@ -42,7 +41,7 @@ public class UnitProgression
             CurrentExperience -= GetNeddedExperience();
             CurrentLevel++;
 
-            //temporário até a implementação do sistema de ascensão
+            //temporï¿½rio atï¿½ a implementaï¿½ï¿½o do sistema de ascensï¿½o
             CurrentAscensionLevel = Mathf.FloorToInt(CurrentLevel / (float)ascensionLevel);
 
             leveledUp = true;
