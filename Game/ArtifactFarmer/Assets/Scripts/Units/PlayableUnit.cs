@@ -30,7 +30,7 @@ public class PlayableUnit : Unit
 
         this.CurrentMana = PlayerData.baseSpecialStats.mana;
 
-        this.spriteRenderer.sprite = PlayerData.unitSprite;
+        view.Initialize(this);
 
         UnitLevel = new UnitProgression(baseStats, baseSpecialStats, experience, this);
         this.CurrentHealth = UnitLevel.GetStats().health;

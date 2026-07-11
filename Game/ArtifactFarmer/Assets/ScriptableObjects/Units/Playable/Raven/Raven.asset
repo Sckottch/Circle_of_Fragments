@@ -35,7 +35,7 @@ MonoBehaviour:
   element: 0
   elementalWeaknesses: 
   elementalResistance: 4
-  unitPrefab: {fileID: 5932561335117409529, guid: 0afe5021408696647b9036e9542552be, type: 3}
+  unitPrefab: {fileID: 5932561335117409529, guid: 9833cca8b1c8c70488ffb2f09f8ab7a8, type: 3}
   characterClass: 0
   ascensionStat: 6
   passive: {fileID: 11400000, guid: a62448cd84468084d9f37f70a7973922, type: 2}

@@ -24,7 +24,7 @@ public class CommonEnemy : EnemyUnit
         ElementalProfile = new ElementalProfile(EnemyData.element, EnemyData.elementalWeaknesses,
             EnemyData.elementalResistance);
 
-        spriteRenderer.sprite = EnemyData.unitSprite;
+        view.Initialize(this);
 
         lastHealth = baseStats.health;
         CurrentHealth = baseStats.health;

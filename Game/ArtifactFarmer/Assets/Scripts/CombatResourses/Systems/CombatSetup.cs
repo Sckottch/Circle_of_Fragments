@@ -14,10 +14,10 @@ public class CombatSetup : MonoBehaviour
         //offsets temporários para teste, remover/mudar após migração para 3D
         Vector3[] offsets =
         {
-            new(0,0,0),
-            new(-3,3,0),
-            new(-3,-3,0),
-            new(-6,0,0)
+            new(0.6f,0,0),
+            new(-0.6f,0,0),
+            new(-1.8f,0,0),
+            new(-3,0,0)
         };
 
         foreach(GameObject child in playerTeamTransform)

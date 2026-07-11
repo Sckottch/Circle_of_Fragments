@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -41,43 +40,39 @@ public class TargetSelectionBattleState : ICombatState
             battleState.ChangeState(BattleState.ActionResult);
             yield break;
         }
-        
+
+        StartInputHandler();
         context.SetIsWaitingForTarget(true);
 
-        SubscribeActiveUnits(context);
-
         yield return new WaitUntil(() => !context.IsWaitingForTarget);
+        StopInputHandler();
         
-        UnsubscribeActiveUnits(context);
         battleState.ChangeState(BattleState.ActionResult);
     }
 
-    private void SubscribeActiveUnits(CombatContext context)
+    private void StartInputHandler()
     {
-        List<Unit> validTargets =
-            TargetSystem.GetValidTargets(context.ActiveUnit, context.ActiveUnits, context.CurrentSkill.SkillData);
-        
-        foreach (Unit unit in validTargets)
-        {
-            unit.OnUnitSelected += HandleUnitSelected;
-        }
+        CombatInputHandler input = CombatManager.Instance.Inputs;
+        input.OnTargetSelected += HandleUnitSelected;
+        input.StartListening();
     }
-
-    private void UnsubscribeActiveUnits(CombatContext context)
+    
+    private void StopInputHandler()
     {
-        
-        List<Unit> validTargets =
-            TargetSystem.GetValidTargets(context.ActiveUnit, context.ActiveUnits, context.CurrentSkill.SkillData);
-        
-        foreach (Unit unit in validTargets)
-        {
-            unit.OnUnitSelected -= HandleUnitSelected;
-        }
+        CombatInputHandler input = CombatManager.Instance.Inputs;
+        input.OnTargetSelected -= HandleUnitSelected;
+        input.StopListening();       
     }
 
     private void HandleUnitSelected(Unit target)
     {
         CombatContext context = CombatManager.Instance.Context;
+        if (!TargetSystem.IsValidTarget(target, context.ActiveUnit, context.ActiveUnits,
+                context.CurrentSkill.SkillData))
+        {
+            Debug.Log($"Invalid Target: {target}");
+            return;
+        }
        
         context.SetCurrentTarget(target);
         context.SetIsWaitingForTarget(false);

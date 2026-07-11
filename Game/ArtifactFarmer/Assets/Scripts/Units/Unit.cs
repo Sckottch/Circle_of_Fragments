@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(UnitView))]
 [DisallowMultipleComponent]
 public abstract class Unit : MonoBehaviour
 {
@@ -27,22 +26,20 @@ public abstract class Unit : MonoBehaviour
 
     public UnitBaseData UnitData { get; protected set; }
     public ModifierSystem ModifierSystem { get; protected set; } = new();
-
-    protected SpriteRenderer spriteRenderer;
+    protected UnitView view;
 
     //Events
     public event Action OnHealthChanged;
     public event Action<Unit> OnDeath;
     public event Action OnManaChanged;
-    public event Action<Unit> OnUnitSelected;
     public event Action<Unit> OnMaxHealthChanged;
     public event Action<Unit, float> OnHit;
-    // public event Action<Unit, Buff, Unit> OnBuffApplied; TODO: avaliar se os eventos de buff ficam no unit, e se for o caso movê-los ao local correto
+    // public event Action<Unit, Buff, Unit> OnBuffApplied; TODO: avaliar se os eventos de buff ficam no unit, e se não for o caso movê-los ao local correto
     // public event Action<Unit, Buff> OnBuffRemoved; 
 
     protected void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        view = GetComponent<UnitView>();
     }
 
     public abstract void Initialize(UnitBaseData unitData, int experience = 0);
@@ -142,35 +139,17 @@ public abstract class Unit : MonoBehaviour
     public void MaxHealthChanged()
     {
         UpdateCurrentHealth();
-
         OnMaxHealthChanged?.Invoke(this);
     }
 
     private void UpdateCurrentHealth()
     {
         float currentHealthPercentage = CurrentHealth / lastHealth;
-
         CurrentHealth = GetStats().health * currentHealthPercentage;
-    }
-
-    public void SetMaterial(Material material)
-    {
-        spriteRenderer.material = material;
     }
 
     public bool CanAct()
     {
         return IsAlive();
-    }
-
-    private void OnMouseDown()
-    {
-        if (CombatManager.Instance.Context.IsWaitingForTarget && IsAlive())
-        {
-            OnUnitSelected?.Invoke(this);
-            Debug.Log("Unit Targeted");
-        }
-        
-        Debug.Log($"{UnitName} got clicked");
     }
 }

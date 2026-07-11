@@ -35,5 +35,5 @@ MonoBehaviour:
   element: 1
   elementalWeaknesses: 0100000002000000
   elementalResistance: 4
-  unitPrefab: {fileID: 811028728075508992, guid: cc9d0f647a56ce64c861be604b1b5b82, type: 3}
+  unitPrefab: {fileID: 811028728075508992, guid: f7790acd31239524096356bc11bd9d21, type: 3}
   enemySkill: {fileID: 11400000, guid: 13d3f6055b2f5d246b7406b2a5c665fb, type: 2}
