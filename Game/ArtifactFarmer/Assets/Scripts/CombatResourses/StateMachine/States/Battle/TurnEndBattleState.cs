@@ -16,7 +16,9 @@ public class TurnEndBattleState : ICombatState
     {
         CombatContext context = CombatManager.Instance.Context;
 
-        Unit activeUnit = context.ActiveUnit; //por ora sem uso, mas será usado para notificações e sistema de buffs no futuro
+        Unit activeUnit = context.ActiveUnit;
+        CombatManager.Instance.Events.TurnEnd(activeUnit);
+        context.ClearTurnData();
 
         if (!context.HasEnemiesAlive && !context.HasEnemiesToSpawn)
         {
@@ -30,7 +32,6 @@ public class TurnEndBattleState : ICombatState
             return;
         }
 
-        context.ClearTurnData();
         battleState.ChangeState(BattleState.TurnStart);
     }
 }

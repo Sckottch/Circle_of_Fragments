@@ -20,7 +20,7 @@ public class SceneLoader : ManagerBase<SceneLoader>
     {
         if (sceneName == CurrentSceneName)
         {
-            Debug.LogWarning($"Cena '{sceneName}' j· est· carregada.");
+            Debug.LogWarning($"Cena '{sceneName}' j√° est√° carregada.");
             yield break;
         }
 

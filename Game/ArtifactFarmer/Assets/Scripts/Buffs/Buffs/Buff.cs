@@ -24,29 +24,25 @@ public abstract class Buff : ScriptableObject
     public bool isDebuff; 
     public BuffActionTime actionTime; // When the buff apply its effect(if it has any)
 
-    #region Private Fields
-
     protected List<BuffStack> stacks;
     public Unit Caster { get; protected set; }
     public Unit Target { get; protected set; }
-
-    #endregion
+    public bool IsExpired() => stacks.Count == 0;
 
     public abstract void OnApply(Unit target, Unit caster); 
 
-    public abstract void ApplyEffect(Unit target);
+    public abstract void ApplyEffect();
 
-    public abstract void OnRemove(Unit target);
+    public abstract void OnRemove();
 
     protected abstract void OnStackChange();
 
-    public void Add()
+    protected void Add()
     {
-        stacks ??= new();
+        stacks ??= new List<BuffStack>();
 
         BuffStack newStack = new BuffStack
         {
-            buff = this,
             duration = duration
         };
 
@@ -56,7 +52,7 @@ public abstract class Buff : ScriptableObject
         }
         else
         {
-            // Substitui o stack com menor duração pelo novo stack
+            // Substitui o stack com menor duraÃ§Ã£o pelo novo stack
             int minIndex = 0;
             int minDuration = stacks[0].duration;
 
@@ -75,9 +71,7 @@ public abstract class Buff : ScriptableObject
 
     public void Tick()
     {
-        if (stacks == null)
-            return;
-
+        if (stacks == null) return;
 
         foreach (BuffStack stack in stacks)
         {
@@ -88,30 +82,20 @@ public abstract class Buff : ScriptableObject
     public void RemoveExpiredStacks()
     {
         if (stacks == null) return;
-
         int initialCount = stacks.Count;
-
+        
         stacks.RemoveAll(stack => stack.duration <= 0);
-
         int removedCount = initialCount - stacks.Count;
-
-        if (stacks.Count == 0)
-        {
-            duration = 0;
-            return;
-        }
 
         if (removedCount > 0 && Target != null)
         {
             OnStackChange();
         }
     }
-
 }
 
 [System.Serializable]
 public class BuffStack
 {
-    public Buff buff;
     public int duration; // Remaining turns
 }

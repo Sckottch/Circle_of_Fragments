@@ -34,8 +34,6 @@ public abstract class Unit : MonoBehaviour
     public event Action OnManaChanged;
     public event Action<Unit> OnMaxHealthChanged;
     public event Action<Unit, float> OnHit;
-    // public event Action<Unit, Buff, Unit> OnBuffApplied; TODO: avaliar se os eventos de buff ficam no unit, e se não for o caso movê-los ao local correto
-    // public event Action<Unit, Buff> OnBuffRemoved; 
 
     protected void Awake()
     {
@@ -109,7 +107,7 @@ public abstract class Unit : MonoBehaviour
         OnManaChanged?.Invoke();
     }
 
-    public void Death(Unit unit)
+    private void Death(Unit unit)
     {
         OnDeath?.Invoke(unit);
         CombatManager.Instance.Events.UnitDied(this);
@@ -123,12 +121,12 @@ public abstract class Unit : MonoBehaviour
 
     public void ApplyBuff(Buff buff, Unit caster)
     {
-        //OnBuffApplied?.Invoke(this, buff, caster);
+        CombatManager.Instance.Events.BuffApplied(this, buff, caster);
     }
 
     public void RemoveBuff(Buff buff)
     {
-        //OnBuffRemoved?.Invoke(this, buff);
+        CombatManager.Instance.Events.BuffRemoved(this, buff);
     }
 
     public void SpeedChanged()

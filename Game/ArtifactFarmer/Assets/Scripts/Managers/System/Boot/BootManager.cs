@@ -19,7 +19,7 @@ public class BootManager : MonoBehaviour
         {
             if (gameSystemsRootPrefab == null)
             {
-                Debug.LogError("GameSystemsRoot Prefab não atribuido no BootManager!");
+                Debug.LogError("GameSystemsRoot Prefab nï¿½o atribuido no BootManager!");
                 yield break;
             }
 
@@ -38,7 +38,7 @@ public class BootManager : MonoBehaviour
             if (mb is IInitializable initializableManager)
             {
                 managers.Add(initializableManager);
-                Debug.Log($"Gerenciador Encontrado para Inicialização: {mb.GetType().Name}");
+                Debug.Log($"Gerenciador Encontrado para InicializaÃ§Ã£o: {mb.GetType().Name}");
             }
         }
 

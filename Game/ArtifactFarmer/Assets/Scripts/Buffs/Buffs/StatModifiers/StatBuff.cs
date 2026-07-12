@@ -9,18 +9,13 @@ public class StatBuff : Buff
 
     private Modifier currentModifier;
 
-    public override void ApplyEffect(Unit target)
+    public override void ApplyEffect()
     {
         
     }
 
     public override void OnApply(Unit target, Unit caster)
     {
-        if (Target == null && target == caster)
-        {
-            duration++;
-        }
-
         Add();
         Caster = caster;
         Target = target;
@@ -35,9 +30,9 @@ public class StatBuff : Buff
         ApplyStatModifier(target);
     }
 
-    public override void OnRemove(Unit target)
+    public override void OnRemove()
     {
-        target.ModifierSystem.RemoveModifier(currentModifier);
+        Target.ModifierSystem.RemoveModifier(currentModifier);
     }
 
     protected override void OnStackChange()

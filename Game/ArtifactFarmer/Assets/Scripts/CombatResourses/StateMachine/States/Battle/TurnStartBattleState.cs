@@ -21,15 +21,14 @@ public class TurnStartBattleState : ICombatState
         context.SetActiveUnit(unit);
         data.RecalculateActionValue();
         CombatManager.Instance.Events.TurnOrderChanged();
-
+        CombatManager.Instance.Events.TurnStarted(unit);
+        
         if (!unit.CanAct())
         {
             battleState.ChangeState(BattleState.TurnEnd);
             return;
         }
-
         
-
         battleState.ChangeState(BattleState.ActionSelection);
     }
 }

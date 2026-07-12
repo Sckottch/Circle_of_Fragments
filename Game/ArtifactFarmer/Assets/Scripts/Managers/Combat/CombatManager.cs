@@ -16,8 +16,9 @@ public class CombatManager : SingletonMonoBehaviour<CombatManager>
     public CombatState CurrentState { get; private set; } = CombatState.Idle;
     public CombatData CurrentCombatData { get; private set; }
     public CombatEvents Events { get; private set; }
-    private CombatListener listener;
     public CombatInputHandler Inputs { get; private set; }
+    private CombatListener listener;
+    private BuffSystem buffSystem; 
     
     //States
     private IdleCombatState idleState = new ();
@@ -78,19 +79,31 @@ public class CombatManager : SingletonMonoBehaviour<CombatManager>
     private void StartCombat(CombatData data)
     {
         Events = new CombatEvents();
-        listener = new CombatListener(Events);
-        combatUIManager.SubscribeUIEvents();
-        Inputs = new CombatInputHandler();
         CurrentCombatData = data;
+        SetupComponents();
         ChangeCombatState(CombatState.Idle);
     }
 
     private void EndCombat(CombatEndResult result)
     {
+        DisposeComponents();
+        Events = null;
+    }
+
+    private void SetupComponents()
+    {
+        listener = new CombatListener(Events);
+        Inputs = new CombatInputHandler();
+        combatUIManager.SubscribeUIEvents();
+        buffSystem = new BuffSystem(Events);
+    }
+
+    private void DisposeComponents()
+    {
         listener.Dispose();
         Inputs.Dispose();
         combatUIManager.UnsubscribeUIEvents();
-        Events = null;
+        buffSystem.Dispose();
     }
 
     public void StartRoutine(IEnumerator routine)

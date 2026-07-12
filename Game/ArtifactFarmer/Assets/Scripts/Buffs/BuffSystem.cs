@@ -1,162 +1,85 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 
-public class BuffSystem : MonoBehaviour
+public class BuffSystem : IDisposable
 {
-    List<Unit> activeUnits = new List<Unit>();
+    private CombatEvents eventBus;
 
-
-
-    #region Units Setup
-
-    private void HandleWaveStart(List<PlayableUnit> playerUnits, List<EnemyUnit> enemyUnits)
+    public BuffSystem(CombatEvents events)
     {
-        activeUnits.Clear();
-        activeUnits.AddRange(playerUnits);
-        activeUnits.AddRange(enemyUnits);
+        eventBus = events;
 
-        foreach(Unit unit in activeUnits)
-        {
-            unit.OnDeath += HandleUnitDeath;
-            // unit.OnBuffApplied += HandleBuffApplied;
-        }
-
-        Debug.Log($"BuffSystem started with {activeUnits.Count} active units.");
+        eventBus.OnTurnStart += HandleTurnStart;
+        eventBus.OnTurnEnd += HandleTurnEnd;
+        eventBus.OnBuffApplied += HandleBuffApplied;
+        eventBus.OnBuffRemoved += HandleBuffRemoved;
+        eventBus.OnUnitDeath += HandleUnitDeath;
     }
 
-    private void HandleEnemyUnitAdded(EnemyUnit enemyUnit)
+    public void Dispose()
     {
-        if (!activeUnits.Contains(enemyUnit))
-        {
-            activeUnits.Add(enemyUnit);
-            enemyUnit.OnDeath += HandleUnitDeath;
-            // enemyUnit.OnBuffApplied += HandleBuffApplied;
-        }
-
-        Debug.Log($"BuffSystem: Enemy unit added: {enemyUnit.UnitName}. Total active units: {activeUnits.Count}");
-    }
-
-    private void HandleUnitDeath(Unit unit)
-    {
-        activeUnits.Remove(unit);
-
-        unit.OnDeath -= HandleUnitDeath;
-        // unit.OnBuffApplied -= HandleBuffApplied;
-    }
-
-    #endregion
-
-    #region Buff Handlers
-
-    private void HandleBuffApplied(Unit target, Buff buff, Unit caster)
-    {
-        Buff existingBuff = target.ActiveBuffs.Find(b => b.buffName == buff.buffName);
-
-        if (existingBuff == null)
-        {
-            Buff newBuff = Instantiate(buff);
-            target.ActiveBuffs.Add(newBuff);
-            newBuff.OnApply(target, caster);
-
-            Debug.Log($"Buff '{newBuff.buffName}' applied to {target.UnitName} by {caster.UnitName}.");
-        }
-        else
-        {
-            existingBuff.OnApply(target, caster);
-        } 
+        eventBus.OnTurnStart -= HandleTurnStart;
+        eventBus.OnTurnEnd -= HandleTurnEnd;
+        eventBus.OnBuffApplied -= HandleBuffApplied;
+        eventBus.OnBuffRemoved -= HandleBuffRemoved;
+        eventBus.OnUnitDeath -= HandleUnitDeath;
     }
 
     private void HandleTurnStart(Unit unit)
-    {
-        ApplyTurnStartBuffs(unit);
-
-        TickBuffs(unit);
-    }
-
-    private void HandleTurnEnd(Unit unit)
-    {
-        ApplyTurnEndBuffs(unit);
-
-        RemoveExpiredStacks(unit);
-
-        RemoveBuffs(unit);
-    }
-
-    private void ApplyTurnStartBuffs(Unit unit)
-    {
-        List<Buff> buffs = unit.ActiveBuffs.FindAll(b => b.actionTime == BuffActionTime.OnTurnStart && b.duration > 0);
-
-        foreach (Buff buff in buffs)
-        {
-            buff.ApplyEffect(unit);
-        }
-    }
-
-    private void ApplyTurnEndBuffs(Unit unit)
-    {
-        List<Buff> buffs = unit.ActiveBuffs.FindAll(b => b.actionTime == BuffActionTime.OnTurnEnd && b.duration > 0);
-
-        foreach (Buff buff in buffs)
-        {
-            buff.ApplyEffect(unit);
-        }
-    }
-
-    private void TickBuffs(Unit unit)
     {
         foreach (Buff buff in unit.ActiveBuffs)
         {
             buff.Tick();
         }
-    }
 
-    private void RemoveExpiredStacks(Unit unit)
-    {
-        foreach (Buff buff in unit.ActiveBuffs)
+        List<Buff> buffs = unit.ActiveBuffs.FindAll(b => b.actionTime == BuffActionTime.OnTurnStart);
+        foreach (Buff buff in buffs)
         {
-            buff.RemoveExpiredStacks();
+            buff.ApplyEffect();
+        }
+    }
+    
+    private void HandleTurnEnd(Unit unit)
+    {
+        List<Buff> buffs = unit.ActiveBuffs.FindAll(b => b.actionTime == BuffActionTime.OnTurnEnd);
+        foreach (Buff buff in buffs)
+        {
+            buff.ApplyEffect();
+        }
+
+        foreach (Buff buff in unit.ActiveBuffs) buff.RemoveExpiredStacks();
+
+        List<Buff> buffsToRemove = unit.ActiveBuffs.FindAll(b => b.IsExpired());
+        foreach (Buff buff in buffsToRemove)
+        {
+            unit.RemoveBuff(buff);
         }
     }
 
-    private void RemoveBuffs(Unit unit)
+    private void HandleBuffApplied(Unit target, Buff buff, Unit caster)
     {
-        foreach (Buff buff in unit.ActiveBuffs)
+        if (!target.ActiveBuffs.Any(b => b.buffName == buff.buffName))
         {
-            if (buff.duration <= 0)
-            {
-                buff.OnRemove(unit);
-                unit.RemoveBuff(buff);
-            }
+            Buff newBuff = UnityEngine.Object.Instantiate(buff);
+            target.ActiveBuffs.Add(newBuff);
+            buff.OnApply(target, caster);
+            return;
         }
 
-        unit.ActiveBuffs.RemoveAll(b => b.duration <= 0);
+        Buff activeBuff = target.ActiveBuffs.Find(b => b.buffName == buff.buffName);
+        activeBuff.OnApply(target, caster);
     }
 
-    #endregion
-
-    #region Cleanup
-
-    private void HandleWaveEnd()
+    private void HandleBuffRemoved(Unit target, Buff buff)
     {
-        Clear();
+        buff.OnRemove();
+        target.ActiveBuffs.Remove(buff);
     }
 
-    private void HandleCombatEnd(CombatEndResult endResult)
+    private void HandleUnitDeath(Unit unit)
     {
-        Clear();
+        foreach (Buff buff in unit.ActiveBuffs) buff.OnRemove();
+        unit.ActiveBuffs.Clear();
     }
-
-    private void Clear()
-    {
-        foreach (Unit unit in activeUnits)
-        {
-            unit.OnDeath -= HandleUnitDeath;
-            // unit.OnBuffApplied -= HandleBuffApplied;
-        }
-
-        activeUnits.Clear();
-    }
-
-    #endregion
 }
