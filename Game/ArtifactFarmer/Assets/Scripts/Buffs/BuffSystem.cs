@@ -63,7 +63,7 @@ public class BuffSystem : IDisposable
         {
             Buff newBuff = UnityEngine.Object.Instantiate(buff);
             target.ActiveBuffs.Add(newBuff);
-            buff.OnApply(target, caster);
+            newBuff.OnApply(target, caster);
             return;
         }
 

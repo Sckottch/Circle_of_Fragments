@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 public abstract class EnemyUnit : Unit
 {
     public abstract EnemyCategory Category { get; }

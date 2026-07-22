@@ -52,7 +52,6 @@ public abstract class Buff : ScriptableObject
         }
         else
         {
-            // Substitui o stack com menor duração pelo novo stack
             int minIndex = 0;
             int minDuration = stacks[0].duration;
 

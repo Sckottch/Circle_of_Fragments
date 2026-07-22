@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CommonEnemy : EnemyUnit
@@ -35,6 +33,11 @@ public class CommonEnemy : EnemyUnit
 
     public override Skill GetSkill(ActionType type)
     {
-        return type != ActionType.Enemy ? null : skills[0];
+        if (type != ActionType.Enemy)
+        {
+            Debug.LogError("tipo inválido para skill de inimigo");
+            return null;
+        }
+        return skills[0];
     }
 }
